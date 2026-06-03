@@ -1,0 +1,19 @@
+{
+  "name": "musclemap-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.18.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "echo start playground later",
+    "build": "echo build packages later",
+    "test": "echo add tests later",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
