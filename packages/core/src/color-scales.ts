@@ -1,5 +1,46 @@
 import type { MuscleColorModel } from "./types";
 
+const NEUTRAL = "#334155";
+
+/** A stepped color stop: the lowest score (inclusive) that maps to `color`. */
+type ColorStop = { readonly min: number; readonly color: string };
+
+/**
+ * Stepped color scales per model, ordered high → low. The first stop whose
+ * `min` the (clamped) score reaches wins; the trailing `min: 0` stop is the
+ * model's base color. Data-driven so each model stays a flat table.
+ */
+const SCALE_STOPS: Record<MuscleColorModel, readonly ColorStop[]> = {
+  LOAD: [
+    { min: 86, color: "#ef4444" },
+    { min: 71, color: "#f97316" },
+    { min: 51, color: "#facc15" },
+    { min: 31, color: "#22c55e" },
+    { min: 11, color: "#0ea5e9" },
+    { min: 0, color: NEUTRAL },
+  ],
+  FREQUENCY: [
+    { min: 86, color: "#ef4444" },
+    { min: 61, color: "#f97316" },
+    { min: 31, color: "#22c55e" },
+    { min: 1, color: "#0ea5e9" },
+    { min: 0, color: NEUTRAL },
+  ],
+  BALANCE: [
+    { min: 81, color: "#ef4444" },
+    { min: 61, color: "#f97316" },
+    { min: 46, color: "#22c55e" },
+    { min: 31, color: "#38bdf8" },
+    { min: 0, color: "#8b5cf6" },
+  ],
+  RECOVERY_RISK: [
+    { min: 76, color: "#ef4444" },
+    { min: 51, color: "#f97316" },
+    { min: 26, color: "#facc15" },
+    { min: 0, color: "#22c55e" },
+  ],
+};
+
 function clampScore(score: number): number {
   if (!Number.isFinite(score)) return 0;
   return Math.max(0, Math.min(100, score));
@@ -7,38 +48,9 @@ function clampScore(score: number): number {
 
 export function getMuscleColor(score: number, model: MuscleColorModel = "LOAD"): string {
   const value = clampScore(score);
-
-  if (model === "LOAD") {
-    if (value >= 86) return "#ef4444";
-    if (value >= 71) return "#f97316";
-    if (value >= 51) return "#facc15";
-    if (value >= 31) return "#22c55e";
-    if (value >= 11) return "#0ea5e9";
-    return "#334155";
+  const stops = SCALE_STOPS[model] ?? [];
+  for (const stop of stops) {
+    if (value >= stop.min) return stop.color;
   }
-
-  if (model === "FREQUENCY") {
-    if (value >= 86) return "#ef4444";
-    if (value >= 61) return "#f97316";
-    if (value >= 31) return "#22c55e";
-    if (value >= 1) return "#0ea5e9";
-    return "#334155";
-  }
-
-  if (model === "BALANCE") {
-    if (value >= 81) return "#ef4444";
-    if (value >= 61) return "#f97316";
-    if (value >= 46) return "#22c55e";
-    if (value >= 31) return "#38bdf8";
-    return "#8b5cf6";
-  }
-
-  if (model === "RECOVERY_RISK") {
-    if (value >= 76) return "#ef4444";
-    if (value >= 51) return "#f97316";
-    if (value >= 26) return "#facc15";
-    return "#22c55e";
-  }
-
-  return "#334155";
+  return NEUTRAL;
 }
