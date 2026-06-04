@@ -1,7 +1,9 @@
 # Asset provenance
 
-MuscleMap ships two distinct classes of assets with different origins. This
-document records where each comes from so the licensing story is unambiguous.
+MuscleMap ships two classes of assets with different origins. **Everything in
+this repository is licensed under MIT** — code, traced muscle path data, and the
+body photographs alike, all free to use, modify and redistribute. This document
+records where each comes from so the provenance is transparent.
 
 ## 1. Muscle path data — original, MIT
 
@@ -14,14 +16,12 @@ semantic IDs (`CHEST_LEFT`, `TRAPEZIUS_LEFT`, `BODY`, …).
 - **License:** MIT (same as the code).
 - **What ships:** only compiled path data. The package's `files` field is
   `["dist"]`, so the published tarball contains JavaScript and type
-  declarations — **no images**.
+  declarations — no images. (The photos below are not *needed* by the package;
+  they're still MIT and free to grab from the repo.)
 
-These are the assets a consumer actually depends on, and they are fully free.
+## 2. Reference body photographs — OpenAI-generated, MIT
 
-## 2. Reference body photographs — OpenAI-generated, demo-only
-
-The greyscale "photoreal hybrid" look in the playground is backed by four
-reference photos:
+The greyscale "photoreal hybrid" look is backed by four reference photos:
 
 ```
 apps/playground/public/bg-male-front.png
@@ -34,30 +34,27 @@ These were **generated with OpenAI image tooling from the maintainer's own
 prompts and then manually edited/traced over** to produce the muscle geometry
 above.
 
-- **Scope:** used **only** by `apps/playground`, which is a private,
-  unpublished demo (`"private": true`, not part of any npm package).
-- **Not redistributed:** no published package includes these PNGs. They exist
-  in the repository purely to drive the visual demo and the README screenshots.
-- **Why demo-only:** under OpenAI's terms the maintainer owns the output to the
-  extent permitted by law, but generated output is not guaranteed to be unique
-  and the user remains responsible for the content. Rather than make claims we
-  can't fully guarantee for downstream redistribution, these images are kept
-  out of the published packages.
+- **License:** MIT — free to use, copy, modify and redistribute.
+- **Where they live:** in the repository under `apps/playground/public/`. The
+  playground itself is a private, unpublished demo, so the PNGs are not bundled
+  into any npm tarball — but they are part of this MIT-licensed repo, so you can
+  copy them straight from here if you want the same look.
+- **Note on AI output:** under OpenAI's terms the maintainer owns the output to
+  the extent permitted by law. Generated output is not guaranteed to be unique;
+  as with any asset, satisfy yourself that it fits your use case before shipping.
 
 ## What this means for you
 
 - **Using `@musclemap/react` / `@musclemap/core` / `@musclemap/assets`:** you
-  get MIT-licensed code and MIT-licensed muscle path data. Nothing here carries
-  an image-provenance caveat.
-- **Want the photoreal hybrid look in production:** supply **your own** body
-  image via the `backgroundImageFront` / `backgroundImageBack` props (see the
-  README). Make sure any reference art you trace over, or any photo you ship,
-  is yours to use.
+  get MIT-licensed code and MIT-licensed muscle path data — no caveats.
+- **Want the photoreal hybrid look:** either copy the MIT-licensed reference
+  photos from `apps/playground/public/`, or supply your own image via the
+  `backgroundImageFront` / `backgroundImageBack` props (see the README).
 
 ## Summary
 
-| Asset | Origin | License | Published? |
+| Asset | Origin | License | In npm tarball? |
 |---|---|---|---|
 | Muscle SVG path data (`@musclemap/assets`) | Original, traced in Inkscape | MIT | ✅ yes (`dist` only) |
-| Body reference photos (`bg-*.png`) | OpenAI-generated + manually edited | Demo-only, not redistributed | ❌ playground only |
+| Body reference photos (`bg-*.png`) | OpenAI-generated + manually edited | **MIT** | ❌ repo only (playground), still MIT |
 | All source code | Original | MIT | ✅ yes |

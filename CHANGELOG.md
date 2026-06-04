@@ -17,9 +17,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Unit tests (vitest) and CI (build / typecheck / test / pack dry-run).
 - React SSR render smoke tests (figures, heat color, `partValues` override,
   female back diagram).
-- [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md) documenting asset origins:
-  original MIT-licensed muscle path data vs. OpenAI-generated, demo-only body
-  photos that ship with no published package.
+- [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md) documenting asset origins.
+  **Everything is MIT** — original muscle path data and the OpenAI-generated,
+  manually-edited body photos alike, all free to use and redistribute.
 - README status/CI/license badges.
 
 ### Fixed

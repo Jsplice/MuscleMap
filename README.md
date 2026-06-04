@@ -215,7 +215,7 @@ A `BodyDiagram` is just SVG path data with semantic IDs. To add or replace a bod
 
 Each labelled surface becomes individually addressable; the coarse `group` (mapped from the label) enables region filtering and bundled coloring.
 
-> **Licensing:** The traced **SVG path data** in `@musclemap/assets` is original work and ships under MIT (the package's `files` field is `["dist"]`, so only path data — no images — is published). The **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they live only in the (unpublished) playground (`apps/playground/public/`) and are **not part of any published package**. Provide your own body images for your deployment, and make sure any reference art you trace over is yours to use. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
+> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work (the package's `files` field is `["dist"]`, so only path data — no images — is published). The **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they live in `apps/playground/public/` and are MIT too — copy them straight from the repo, or supply your own. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
 
 ---
 
@@ -232,9 +232,9 @@ pnpm typecheck
 
 ## License
 
-**MIT** — covers all source code and the traced SVG muscle path data in
-`@musclemap/assets`. The demo body photos in `apps/playground/public/` were
-generated with OpenAI image tooling (maintainer's own prompts) and manually
-edited; they are used only by the playground and are **not redistributed by any
-published package**. See [`LICENSE`](LICENSE) and
+**MIT — and it covers everything in this repository**: all source code, the
+traced SVG muscle path data in `@musclemap/assets`, **and** the body photos in
+`apps/playground/public/` (generated with OpenAI image tooling from the
+maintainer's own prompts, then manually edited). All of it is free to use,
+modify and redistribute. See [`LICENSE`](LICENSE) and
 [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
