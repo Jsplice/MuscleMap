@@ -26,7 +26,8 @@ Scope of this license:
 
 - The MIT license above covers all source code in this repository, including
   the SVG muscle path data in `packages/assets` (original traced vector work).
-- The demo body photographs in `apps/playground/public/` (e.g. `bg-male-*.png`)
-  are AI-generated assets used only by the (private, unpublished) playground.
+- The demo body photographs in `apps/playground/public/` (`bg-male-*.png`,
+  `bg-female-*.png`) are AI-generated assets used only by the (private,
+  unpublished) playground.
   They are NOT part of any published npm package and are not redistributed by
   them. For your own deployment, provide your own body images.

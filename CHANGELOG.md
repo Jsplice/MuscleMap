@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- **Female** front & back bodies (own traced geometry, not a male reuse).
 - Per-surface addressing: `partValues` (keyed by path id, e.g. `TRAPEZIUS_LEFT`)
   and `getMuscleSurfaceIds(diagram)`.
 - Cropped region views (`cropToRegion`) — full / upper / lower body.
@@ -24,5 +25,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
   receives `{ group, partId?, value? }`.
 
 ### Notes
-- `0.1.0` is early / pre-release. `sex="FEMALE"` is a placeholder (reuses male
-  geometry). The public API may change before `1.0`.
+- `0.1.0` is early / pre-release. The public API may change before `1.0`.

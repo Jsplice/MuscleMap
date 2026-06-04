@@ -5,8 +5,9 @@
 **Premium, data-driven muscle heatmaps for the web.**
 Render the human body and color each muscle group by a 0–100 score — as a clean flat-vector figure **or** layered over a photorealistic body. Headless core + React.
 
-<img src="docs/media/hero-front.png" alt="MuscleMap front — photoreal body with colored muscle heatmap" width="320" />
-<img src="docs/media/hero-back.png" alt="MuscleMap back — photoreal body with colored muscle heatmap" width="320" />
+<img src="docs/media/hero-front.png" alt="Male front muscle heatmap" width="250" />
+<img src="docs/media/hero-back.png" alt="Male back muscle heatmap" width="250" />
+<img src="docs/media/hero-female-front.png" alt="Female front muscle heatmap" width="250" />
 
 </div>
 
@@ -20,7 +21,7 @@ It is intentionally **app-agnostic** — no database, no backend, no auth, no fr
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
-> **Status — `0.1.0`, early / pre-release.** Stable: the core API, color engine, region rules, the male front & back bodies, and the React component. Experimental / placeholder: **female bodies reuse the male geometry** until dedicated assets land; tests & CI are being built out. The public API may still change before `1.0`.
+> **Status — `0.1.0`, early / pre-release.** Included: the core API, color engine, region rules, **male & female front/back bodies**, the React component, unit tests and CI. The public API may still change before `1.0`.
 
 ### Highlights
 
@@ -183,7 +184,7 @@ getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 |---|---|---|---|
 | `values` | `MuscleMapValues` | — | Score per muscle group (0–100). |
 | `partValues` | `Partial<Record<string, MuscleMapValue>>` | — | Per-surface overrides keyed by path id. |
-| `sex` | `"MALE" \| "FEMALE"` | `"MALE"` | Which body. **`FEMALE` is experimental** — it currently reuses the male geometry until dedicated assets land. |
+| `sex` | `"MALE" \| "FEMALE"` | `"MALE"` | Which body — male and female front/back are both included. |
 | `view` | `"FRONT" \| "BACK" \| "BOTH"` | `"BOTH"` | Which side(s). |
 | `region` | `"FULL_BODY" \| "UPPER_BODY" \| "LOWER_BODY" \| "CORE"` | `"FULL_BODY"` | Active region. |
 | `cropToRegion` | `boolean` | `false` | Crop the figure to `region`. |

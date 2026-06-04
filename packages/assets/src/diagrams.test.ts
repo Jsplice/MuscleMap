@@ -1,8 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { MUSCLE_GROUP_META } from "@musclemap/core";
-import { MALE_BACK, MALE_FRONT, getBodyDiagram, getMuscleSurfaceIds } from "./index";
+import {
+  FEMALE_BACK,
+  FEMALE_FRONT,
+  MALE_BACK,
+  MALE_FRONT,
+  getBodyDiagram,
+  getMuscleSurfaceIds,
+} from "./index";
 
-const DIAGRAMS = { MALE_FRONT, MALE_BACK };
+const DIAGRAMS = { MALE_FRONT, MALE_BACK, FEMALE_FRONT, FEMALE_BACK };
 
 describe.each(Object.entries(DIAGRAMS))("%s diagram", (_name, diagram) => {
   it("uses a 1024x1536 viewBox", () => {
@@ -30,22 +37,24 @@ describe.each(Object.entries(DIAGRAMS))("%s diagram", (_name, diagram) => {
 
 describe("getMuscleSurfaceIds", () => {
   it("returns addressable surface ids", () => {
-    const ids = getMuscleSurfaceIds(MALE_FRONT);
-    expect(ids.length).toBeGreaterThan(0);
-    expect(ids).toContain("CHEST_LEFT");
+    expect(getMuscleSurfaceIds(MALE_FRONT)).toContain("CHEST_LEFT");
     expect(getMuscleSurfaceIds(MALE_BACK)).toContain("TRAPEZIUS_LEFT");
+    expect(getMuscleSurfaceIds(FEMALE_FRONT).length).toBeGreaterThan(0);
+    expect(getMuscleSurfaceIds(FEMALE_BACK)).toContain("TRAPEZIUS_LEFT");
   });
 });
 
 describe("getBodyDiagram", () => {
-  it("resolves sex + view", () => {
+  it("resolves every sex + view", () => {
     expect(getBodyDiagram("MALE", "FRONT")).toBe(MALE_FRONT);
     expect(getBodyDiagram("MALE", "BACK")).toBe(MALE_BACK);
+    expect(getBodyDiagram("FEMALE", "FRONT")).toBe(FEMALE_FRONT);
+    expect(getBodyDiagram("FEMALE", "BACK")).toBe(FEMALE_BACK);
   });
 
-  it("female falls back to male geometry (documented placeholder)", () => {
-    const ff = getBodyDiagram("FEMALE", "FRONT");
-    expect(ff.sex).toBe("FEMALE");
-    expect(ff.muscles).toEqual(MALE_FRONT.muscles);
+  it("female has its own geometry (not a male reuse)", () => {
+    expect(FEMALE_FRONT.sex).toBe("FEMALE");
+    expect(FEMALE_FRONT.muscles).not.toBe(MALE_FRONT.muscles);
+    expect(FEMALE_FRONT.outline[0]!.d).not.toBe(MALE_FRONT.outline[0]!.d);
   });
 });
