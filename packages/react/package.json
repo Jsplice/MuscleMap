@@ -1,15 +1,38 @@
 {
   "name": "@musclemap/react",
   "version": "0.1.0",
+  "description": "React component for MuscleMap — premium, data-driven muscle heatmaps (flat vector or photoreal hybrid).",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "keywords": ["musclemap", "muscle", "anatomy", "heatmap", "react", "fitness", "svg"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jsplice/MuscleMap.git",
+    "directory": "packages/react"
+  },
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
   "dependencies": {
+    "@musclemap/assets": "workspace:*",
     "@musclemap/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

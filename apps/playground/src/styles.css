@@ -1,0 +1,461 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f2f4f7;
+  --ink: #0a0d14;
+  --panel: #141a24;
+  --panel-2: #11161f;
+  --card: #161d28;
+  --line: rgba(148, 163, 184, 0.1);
+  --text: #e8edf4;
+  --muted: #8a96a8;
+  --muted-2: #5f6a7d;
+  --accent: #2f7bff;
+  --accent-2: #1d4ed8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 600px at 18% 0%, #ffffff 0%, var(--bg) 60%),
+    var(--bg);
+  min-height: 100vh;
+  color: var(--text);
+}
+
+.page {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 44px 24px 80px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Phone frame ---------- */
+.phone {
+  width: 392px;
+  background: linear-gradient(180deg, #0c0f16 0%, #090c12 100%);
+  border-radius: 46px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 2px 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 40px 90px rgba(15, 23, 42, 0.45),
+    0 8px 24px rgba(15, 23, 42, 0.25);
+  position: relative;
+}
+
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 116px;
+  height: 28px;
+  background: #05070b;
+  border-radius: 16px;
+  z-index: 5;
+}
+
+.phone-inner {
+  background: radial-gradient(120% 60% at 50% -10%, #121928 0%, #0a0d13 55%);
+  border-radius: 36px;
+  padding: 52px 18px 16px;
+  min-height: 760px;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.muted-icon {
+  color: var(--muted);
+}
+
+.screen-title {
+  margin: 4px 0 16px;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+/* ---------- Period pill ---------- */
+.period {
+  display: flex;
+  background: #0e131c;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+.period-btn {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.period-btn.active {
+  background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+/* ---------- Mode chips ---------- */
+.chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: #10151e;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.chip.active {
+  background: linear-gradient(180deg, #2f7bff 0%, #1d4ed8 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(47, 123, 255, 0.35);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: linear-gradient(180deg, var(--card) 0%, #121823 100%);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-head h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.link-btn:hover {
+  color: var(--text);
+}
+
+.sub {
+  margin: 3px 0 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- Trainingsfokus ---------- */
+.focus {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.focus li {
+  display: grid;
+  grid-template-columns: 12px 10px 92px 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.focus-rank {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted-2);
+}
+
+.focus-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.focus-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.focus-bar {
+  height: 6px;
+  background: rgba(148, 163, 184, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.focus-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 220ms ease;
+}
+
+.focus-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.focus-tag {
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  min-width: 44px;
+  text-align: right;
+}
+
+/* ---------- Balance ---------- */
+.balance {
+  display: grid;
+  grid-template-columns: 84px 36px 1fr 36px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.balance-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.balance-pct {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.balance-pct.right {
+  text-align: right;
+}
+
+.balance-bar {
+  position: relative;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3b82f6, #22c55e);
+  overflow: hidden;
+}
+
+.balance-fill-l {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: rgba(11, 15, 23, 0.001);
+}
+
+.balance-marker {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 2px;
+  height: 11px;
+  background: #e8edf4;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 6px 16px;
+  margin: 4px 6px 0;
+  border-top: 1px solid var(--line);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted-2);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.nav-item.active {
+  color: var(--accent);
+}
+
+/* ---------- Controls panel ---------- */
+.controls {
+  width: 300px;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+  border: 1px solid #e6eaf0;
+  border-radius: 22px;
+  padding: 22px;
+  position: sticky;
+  top: 44px;
+  color: #1c2430;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.controls h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.controls label {
+  display: block;
+  font-size: 12px;
+  color: #6b7686;
+  margin: 16px 0 7px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.controls .segmented {
+  background: #eef1f6;
+  border: 1px solid #e2e7ee;
+}
+
+.controls .seg-btn {
+  color: #6b7686;
+}
+
+.controls .seg-btn.active {
+  background: linear-gradient(180deg, #2f7bff 0%, #1d4ed8 100%);
+  color: #fff;
+}
+
+/* shared segmented (used in controls) */
+.segmented {
+  display: flex;
+  gap: 4px;
+  border-radius: 12px;
+  padding: 4px;
+  flex-wrap: wrap;
+}
+
+.seg-btn {
+  flex: 1 1 auto;
+  min-width: 54px;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.reset {
+  margin-top: 12px;
+  width: 100%;
+  border: 1px solid #e2e7ee;
+  background: #fff;
+  color: #6b7686;
+  border-radius: 10px;
+  padding: 9px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reset:hover {
+  color: #1c2430;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: #1c2430 !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}

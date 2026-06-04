@@ -2,16 +2,22 @@
   "name": "musclemap-workspace",
   "version": "0.1.0",
   "private": true,
+  "description": "Premium, data-driven muscle heatmaps for the web — headless core + React, flat-vector or photoreal.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jsplice/MuscleMap.git"
+  },
   "type": "module",
   "packageManager": "pnpm@10.18.2",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "dev": "echo start playground later",
-    "build": "echo build packages later",
-    "test": "echo add tests later",
-    "typecheck": "tsc --noEmit"
+    "dev": "pnpm --filter @musclemap/playground dev",
+    "build": "pnpm --filter \"./packages/*\" -r build",
+    "typecheck": "pnpm --filter \"./packages/*\" -r typecheck",
+    "test": "pnpm -r test"
   },
   "devDependencies": {
     "typescript": "^6.0.3"

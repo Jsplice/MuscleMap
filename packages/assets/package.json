@@ -1,7 +1,7 @@
 {
-  "name": "@musclemap/core",
+  "name": "@musclemap/assets",
   "version": "0.1.0",
-  "description": "Headless core for MuscleMap — muscle-group types, color scales and region/visibility rules. UI-free.",
+  "description": "Body diagrams for MuscleMap — segmented muscle SVG path data with semantic IDs and region viewBoxes. Framework-free.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -14,15 +14,18 @@
   },
   "files": ["dist"],
   "sideEffects": false,
-  "keywords": ["musclemap", "muscle", "anatomy", "heatmap", "fitness", "headless"],
+  "keywords": ["musclemap", "muscle", "anatomy", "svg", "body"],
   "repository": {
     "type": "git",
     "url": "https://github.com/Jsplice/MuscleMap.git",
-    "directory": "packages/core"
+    "directory": "packages/assets"
+  },
+  "dependencies": {
+    "@musclemap/core": "workspace:*"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo add core tests"
+    "test": "echo add asset tests"
   }
 }
