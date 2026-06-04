@@ -123,10 +123,10 @@ export function App() {
   const [sex, setSex] = useState<MuscleMapSex>("MALE");
   const [modelOverride, setModelOverride] = useState<MuscleColorModel | null>(null);
   const [tooltipFields, setTooltipFields] = useState<TooltipField[]>(["group", "score"]);
-  const [showBackground, setShowBackground] = useState(false);
-  const [bgOpacity, setBgOpacity] = useState(0.7);
+  const [showBackground, setShowBackground] = useState(true);
+  const [bgOpacity, setBgOpacity] = useState(0.45);
   const [bgGray, setBgGray] = useState(true);
-  const [bgBright, setBgBright] = useState(1.6);
+  const [bgBright, setBgBright] = useState(1.2);
 
   const values = DEMO_BY_MODE[mode];
   const colorModel = modelOverride ?? DEFAULT_MODEL[mode];
