@@ -30,5 +30,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
   (respecting `partValues`), not just the group value. `onSelectMuscle` now
   receives `{ group, partId?, value? }`.
 
+### Security
+- Bumped `vitest` `^3.2.4` → `^4.1.8` to resolve GHSA-5xrq-8626-4rwp
+  (Vitest UI server could read/execute arbitrary files; affected `< 4.1.0`).
+  Dev-only dependency; all 41 tests pass on v4.
+
 ### Notes
 - `0.1.0` is early / pre-release. The public API may change before `1.0`.
