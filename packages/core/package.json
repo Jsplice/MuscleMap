@@ -23,6 +23,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo add core tests"
+    "test": "vitest run --root ../.. packages/core"
   }
 }

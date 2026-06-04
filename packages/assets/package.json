@@ -26,6 +26,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo add asset tests"
+    "test": "vitest run --root ../.. packages/assets"
   }
 }

@@ -5,6 +5,10 @@
 **Premium, data-driven muscle heatmaps for the web.**
 Render the human body and color each muscle group by a 0–100 score — as a clean flat-vector figure **or** layered over a photorealistic body. Headless core + React.
 
+[![CI](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml/badge.svg)](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml)
+[![status: early alpha](https://img.shields.io/badge/status-early%20alpha-orange)](#what-it-is)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 <img src="docs/media/hero-front.png" alt="Male front muscle heatmap" width="250" />
 <img src="docs/media/hero-back.png" alt="Male back muscle heatmap" width="250" />
 <img src="docs/media/hero-female-front.png" alt="Female front muscle heatmap" width="250" />
@@ -211,7 +215,7 @@ A `BodyDiagram` is just SVG path data with semantic IDs. To add or replace a bod
 
 Each labelled surface becomes individually addressable; the coarse `group` (mapped from the label) enables region filtering and bundled coloring.
 
-> **Licensing:** The traced **SVG path data** in `@musclemap/assets` is original work and ships under MIT. The **body photographs** used for the hybrid look live only in the (unpublished) playground (`apps/playground/public/`) and are AI-generated demo assets — they are not part of any published package. Provide your own body images for your deployment, and make sure any reference art you trace over is yours to use.
+> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work (the package's `files` field is `["dist"]`, so only path data — no images — is published). The **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they live in `apps/playground/public/` and are MIT too — copy them straight from the repo, or supply your own. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
 
 ---
 
@@ -228,7 +232,9 @@ pnpm typecheck
 
 ## License
 
-**MIT** — covers all source code and the traced SVG muscle path data in
-`@musclemap/assets`. The demo body photos in `apps/playground/public/` are
-AI-generated assets used only by the playground and are not redistributed by
-any published package. See [`LICENSE`](LICENSE).
+**MIT — and it covers everything in this repository**: all source code, the
+traced SVG muscle path data in `@musclemap/assets`, **and** the body photos in
+`apps/playground/public/` (generated with OpenAI image tooling from the
+maintainer's own prompts, then manually edited). All of it is free to use,
+modify and redistribute. See [`LICENSE`](LICENSE) and
+[`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).

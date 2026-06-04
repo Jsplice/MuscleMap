@@ -24,10 +24,11 @@ SOFTWARE.
 
 Scope of this license:
 
-- The MIT license above covers all source code in this repository, including
-  the SVG muscle path data in `packages/assets` (original traced vector work).
-- The demo body photographs in `apps/playground/public/` (`bg-male-*.png`,
-  `bg-female-*.png`) are AI-generated assets used only by the (private,
-  unpublished) playground.
-  They are NOT part of any published npm package and are not redistributed by
-  them. For your own deployment, provide your own body images.
+- The MIT license above covers EVERYTHING in this repository — all source code,
+  the SVG muscle path data in `packages/assets` (original traced vector work),
+  and the body photographs in `apps/playground/public/` (`bg-male-*.png`,
+  `bg-female-*.png`).
+- The body photographs were generated with OpenAI image tooling (from the
+  maintainer's own prompts) and manually edited. They are released under MIT as
+  well — free to use, copy, modify, and redistribute. See ASSET_PROVENANCE.md
+  for details.
