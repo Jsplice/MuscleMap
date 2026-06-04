@@ -15,6 +15,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Fine-grained back muscles: `TRAPEZIUS`, `RHOMBOIDS`, `LATS`, `OBLIQUES`.
 - Keyboard accessibility for muscle selection (focusable paths, Enter/Space).
 - Unit tests (vitest) and CI (build / typecheck / test / pack dry-run).
+- React SSR render smoke tests (figures, heat color, `partValues` override,
+  female back diagram).
+- [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md) documenting asset origins:
+  original MIT-licensed muscle path data vs. OpenAI-generated, demo-only body
+  photos that ship with no published package.
+- README status/CI/license badges.
 
 ### Fixed
 - `CORE` region no longer returns an empty set (muscles can belong to multiple
