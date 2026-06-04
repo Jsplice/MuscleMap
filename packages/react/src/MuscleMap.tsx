@@ -54,7 +54,12 @@ export type MuscleMapProps = {
   backgroundGrayscale?: boolean;
   /** Brightness multiplier for the background images (1 = original). */
   backgroundBrightness?: number;
-  onSelectMuscle?: (group: MuscleGroup, value: MuscleMapValue | undefined) => void;
+  /** Fired on tap/click. `partId` is the specific surface (if any); `value` is the resolved surface/group value. */
+  onSelectMuscle?: (selection: {
+    group: MuscleGroup;
+    partId?: string | undefined;
+    value?: MuscleMapValue | undefined;
+  }) => void;
   className?: string;
   style?: CSSProperties;
 };
@@ -91,13 +96,21 @@ export function MuscleMap({
   className,
   style,
 }: MuscleMapProps) {
+  type Selection = { group: MuscleGroup; partId?: string | undefined };
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [hovered, setHovered] = useState<MuscleGroup | null>(null);
-  const [pinned, setPinned] = useState<MuscleGroup | null>(null);
+  const [hovered, setHovered] = useState<Selection | null>(null);
+  const [pinned, setPinned] = useState<Selection | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const active = pinned ?? hovered;
   const figures = viewsFor(view);
+
+  const resolveValue = (group: MuscleGroup, partId?: string): MuscleMapValue | undefined =>
+    (partId ? partValues?.[partId] : undefined) ?? values[group];
+
+  const handleHover = useCallback((group: MuscleGroup | null, partId?: string) => {
+    setHovered(group ? { group, partId } : null);
+  }, []);
 
   const visibleByView = useMemo(() => {
     const map = new Map<BodyView, Set<MuscleGroup>>();
@@ -108,11 +121,14 @@ export function MuscleMap({
   }, [figures, region]);
 
   const handleSelect = useCallback(
-    (group: MuscleGroup) => {
-      setPinned((prev) => (prev === group ? null : group));
-      onSelectMuscle?.(group, values[group]);
+    (group: MuscleGroup, partId?: string) => {
+      setPinned((prev) =>
+        prev && prev.group === group && prev.partId === partId ? null : { group, partId },
+      );
+      const value = (partId ? partValues?.[partId] : undefined) ?? values[group];
+      onSelectMuscle?.({ group, partId, value });
     },
-    [onSelectMuscle, values],
+    [onSelectMuscle, values, partValues],
   );
 
   const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -121,7 +137,7 @@ export function MuscleMap({
     setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const activeValue = active ? values[active] : undefined;
+  const activeValue = active ? resolveValue(active.group, active.partId) : undefined;
 
   const containerStyle: CSSProperties = {
     position: "relative",
@@ -157,7 +173,7 @@ export function MuscleMap({
             {...(partValues ? { partValues } : {})}
             colorModel={colorModel}
             visibleGroups={visibleByView.get(v)!}
-            activeGroup={active}
+            activeGroup={active?.group ?? null}
             glow={glow}
             idPrefix={`mm-${sex}-${v}`.toLowerCase()}
             width={figureWidth}
@@ -166,7 +182,7 @@ export function MuscleMap({
             backgroundBrightness={backgroundBrightness}
             {...(v === "FRONT" && backgroundImageFront ? { backgroundImage: backgroundImageFront } : {})}
             {...(v === "BACK" && backgroundImageBack ? { backgroundImage: backgroundImageBack } : {})}
-            onHover={setHovered}
+            onHover={handleHover}
             onSelect={handleSelect}
           />
           );
@@ -203,7 +219,7 @@ export function MuscleMap({
         >
           {showField("group") && (
             <div style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: "0.02em" }}>
-              {labels?.[active] ?? active}
+              {labels?.[active.group] ?? active.group}
             </div>
           )}
           <div style={{ display: "flex", flexDirection: "column", gap: 2, fontSize: 12, color: "#cbd5e1", marginTop: showField("group") ? 4 : 0 }}>

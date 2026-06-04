@@ -17,9 +17,11 @@
     "dev": "pnpm --filter @musclemap/playground dev",
     "build": "pnpm --filter \"./packages/*\" -r build",
     "typecheck": "pnpm --filter \"./packages/*\" -r typecheck",
-    "test": "pnpm -r test"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^3.2.4"
   }
 }

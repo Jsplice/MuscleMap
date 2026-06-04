@@ -23,3 +23,15 @@ const DIAGRAMS: Record<MuscleMapSex, Record<BodyView, BodyDiagram>> = {
 export function getBodyDiagram(sex: MuscleMapSex, view: BodyView): BodyDiagram {
   return DIAGRAMS[sex][view];
 }
+
+/**
+ * The addressable surface ids of a diagram (a muscle path's `id`, e.g.
+ * "TRAPEZIUS_LEFT"). Use these as keys for `partValues`. Surfaces are
+ * data-driven (they come from the traced labels), so this is a runtime list
+ * rather than a fixed type.
+ */
+export function getMuscleSurfaceIds(diagram: BodyDiagram): string[] {
+  return diagram.muscles
+    .map((m) => m.id)
+    .filter((id): id is string => typeof id === "string");
+}

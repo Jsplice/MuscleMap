@@ -20,6 +20,8 @@ It is intentionally **app-agnostic** — no database, no backend, no auth, no fr
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
+> **Status — `0.1.0`, early / pre-release.** Stable: the core API, color engine, region rules, the male front & back bodies, and the React component. Experimental / placeholder: **female bodies reuse the male geometry** until dedicated assets land; tests & CI are being built out. The public API may still change before `1.0`.
+
 ### Highlights
 
 - 🧠 **Headless core** — color scales, region/visibility rules and scoring helpers with zero UI, usable from any framework.
@@ -149,6 +151,8 @@ Set `region` and turn on `cropToRegion` to get a **real cropped view**, not just
 | `UPPER_BODY` | chest, back (traps/lats/rhomboids), shoulders, arms, abs, obliques, lower back | head → waist |
 | `LOWER_BODY` | glutes, quads, hamstrings, calves, adductors, abductors, hip flexors | hips → feet |
 
+There's also a `CORE` region (abs, obliques, lower back) for isolating the midsection — abs belong to both `UPPER_BODY` and `CORE`. The playground demos the three main views; the API supports all four regions.
+
 > Region viewBoxes are precomputed per body and stored on the `BodyDiagram`, so cropping is exact for whatever geometry you ship.
 
 ---
@@ -179,7 +183,7 @@ getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 |---|---|---|---|
 | `values` | `MuscleMapValues` | — | Score per muscle group (0–100). |
 | `partValues` | `Partial<Record<string, MuscleMapValue>>` | — | Per-surface overrides keyed by path id. |
-| `sex` | `"MALE" \| "FEMALE"` | `"MALE"` | Which body. |
+| `sex` | `"MALE" \| "FEMALE"` | `"MALE"` | Which body. **`FEMALE` is experimental** — it currently reuses the male geometry until dedicated assets land. |
 | `view` | `"FRONT" \| "BACK" \| "BOTH"` | `"BOTH"` | Which side(s). |
 | `region` | `"FULL_BODY" \| "UPPER_BODY" \| "LOWER_BODY" \| "CORE"` | `"FULL_BODY"` | Active region. |
 | `cropToRegion` | `boolean` | `false` | Crop the figure to `region`. |
@@ -206,7 +210,7 @@ A `BodyDiagram` is just SVG path data with semantic IDs. To add or replace a bod
 
 Each labelled surface becomes individually addressable; the coarse `group` (mapped from the label) enables region filtering and bundled coloring.
 
-> **Licensing:** Production body assets must be licensed for commercial use and modification. Don't ship copied anatomy graphics without rights. The demo bodies in this repo are generated/owned assets — replace them with your own for production.
+> **Licensing:** The traced **SVG path data** in `@musclemap/assets` is original work and ships under MIT. The **body photographs** used for the hybrid look live only in the (unpublished) playground (`apps/playground/public/`) and are AI-generated demo assets — they are not part of any published package. Provide your own body images for your deployment, and make sure any reference art you trace over is yours to use.
 
 ---
 
@@ -223,4 +227,7 @@ pnpm typecheck
 
 ## License
 
-Code: MIT. See the asset note above regarding body graphics.
+**MIT** — covers all source code and the traced SVG muscle path data in
+`@musclemap/assets`. The demo body photos in `apps/playground/public/` are
+AI-generated assets used only by the playground and are not redistributed by
+any published package. See [`LICENSE`](LICENSE).

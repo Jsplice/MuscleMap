@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Typecheck
+        run: |
+          pnpm typecheck
+          pnpm --filter @musclemap/playground exec tsc --noEmit -p tsconfig.json
+
+      - name: Test
+        run: pnpm test
+
+      - name: Pack (dry-run) — verify published file lists
+        run: pnpm --filter "./packages/*" -r exec npm pack --dry-run

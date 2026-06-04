@@ -1,5 +1,5 @@
 import { memo } from "react";
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import type { CSSProperties } from "react";
 import type { MuscleColorModel, MuscleGroup, MuscleMapValue, MuscleMapValues } from "@musclemap/core";
 import { getMuscleHeatColor } from "@musclemap/core";
 import type { BodyDiagram, MusclePath } from "@musclemap/assets";
@@ -33,8 +33,8 @@ export type BodyFigureProps = {
   backgroundGrayscale?: boolean;
   /** Brightness multiplier for the background image (1 = original). */
   backgroundBrightness?: number;
-  onHover: (group: MuscleGroup | null) => void;
-  onSelect: (group: MuscleGroup) => void;
+  onHover: (group: MuscleGroup | null, partId?: string) => void;
+  onSelect: (group: MuscleGroup, partId?: string) => void;
 };
 
 type RenderMuscle = {
@@ -212,16 +212,25 @@ function BodyFigureImpl({
         {resolved.map((m) => {
           const interactive = m.visible;
           const isActive = activeGroup === m.group;
-          const onPointerDown = interactive
-            ? (e: ReactPointerEvent<SVGPathElement>) => {
-                e.preventDefault();
-                onSelect(m.group);
-              }
-            : undefined;
           const style: CSSProperties = {
             cursor: interactive ? "pointer" : "default",
             transition: "opacity 120ms ease, stroke-width 120ms ease",
+            outline: "none",
           };
+          if (!interactive) {
+            return (
+              <path
+                key={m.key}
+                d={m.d}
+                fill={fillFor(m.color)}
+                stroke={STROKE}
+                strokeWidth={0.8}
+                opacity={0.45}
+                transform={m.mirrored ? mirror : undefined}
+                style={style}
+              />
+            );
+          }
           return (
             <path
               key={m.key}
@@ -229,13 +238,26 @@ function BodyFigureImpl({
               fill={fillFor(m.color)}
               stroke={isActive ? "#f1f5f9" : STROKE}
               strokeWidth={isActive ? 1.6 : 0.8}
-              opacity={interactive ? 1 : 0.45}
               transform={m.mirrored ? mirror : undefined}
               style={style}
-              onMouseEnter={interactive ? () => onHover(m.group) : undefined}
-              onMouseLeave={interactive ? () => onHover(null) : undefined}
-              onClick={interactive ? () => onSelect(m.group) : undefined}
-              onPointerDown={onPointerDown}
+              // Single selection path (pointerdown) avoids the pointerdown+click double-toggle.
+              onPointerDown={(e) => {
+                e.preventDefault();
+                onSelect(m.group, m.partId);
+              }}
+              onMouseEnter={() => onHover(m.group, m.partId)}
+              onMouseLeave={() => onHover(null)}
+              role="button"
+              tabIndex={0}
+              aria-label={m.partId ?? m.group}
+              onFocus={() => onHover(m.group, m.partId)}
+              onBlur={() => onHover(null)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelect(m.group, m.partId);
+                }
+              }}
             />
           );
         })}

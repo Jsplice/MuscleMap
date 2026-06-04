@@ -1,0 +1,58 @@
+import { describe, expect, it } from "vitest";
+import { getColorScaleCss, getColorScaleStops, getMuscleHeatColor } from "./heat-colors";
+
+const HEX = /^#[0-9a-f]{6}$/i;
+
+describe("getMuscleHeatColor", () => {
+  it("always returns a valid hex color", () => {
+    for (const s of [-50, 0, 1, 33, 50, 72, 99, 100, 250, Number.NaN, Infinity]) {
+      expect(getMuscleHeatColor(s, "LOAD")).toMatch(HEX);
+    }
+  });
+
+  it("clamps out-of-range and non-finite scores to the endpoints", () => {
+    const stops = getColorScaleStops("LOAD");
+    const first = stops[0]!.color;
+    const last = stops[stops.length - 1]!.color;
+    expect(getMuscleHeatColor(0, "LOAD")).toBe(first);
+    expect(getMuscleHeatColor(-10, "LOAD")).toBe(first);
+    expect(getMuscleHeatColor(Number.NaN, "LOAD")).toBe(first);
+    expect(getMuscleHeatColor(100, "LOAD")).toBe(last);
+    expect(getMuscleHeatColor(999, "LOAD")).toBe(last);
+  });
+
+  it("interpolates between stops (mid value is neither endpoint)", () => {
+    const mid = getMuscleHeatColor(50, "LOAD");
+    expect(mid).toMatch(HEX);
+    expect(mid).not.toBe(getMuscleHeatColor(0, "LOAD"));
+    expect(mid).not.toBe(getMuscleHeatColor(100, "LOAD"));
+  });
+
+  it("defaults to the LOAD model", () => {
+    expect(getMuscleHeatColor(60)).toBe(getMuscleHeatColor(60, "LOAD"));
+  });
+
+  it("supports every model", () => {
+    for (const m of ["LOAD", "FREQUENCY", "BALANCE", "RECOVERY_RISK"] as const) {
+      expect(getMuscleHeatColor(55, m)).toMatch(HEX);
+    }
+  });
+});
+
+describe("getColorScaleStops / getColorScaleCss", () => {
+  it("returns ordered stops within 0..1", () => {
+    const stops = getColorScaleStops("BALANCE");
+    expect(stops.length).toBeGreaterThan(1);
+    expect(stops[0]!.offset).toBe(0);
+    expect(stops[stops.length - 1]!.offset).toBe(1);
+    for (let i = 1; i < stops.length; i++) {
+      expect(stops[i]!.offset).toBeGreaterThan(stops[i - 1]!.offset);
+    }
+  });
+
+  it("builds a CSS gradient string from the same stops", () => {
+    const css = getColorScaleCss("LOAD", "90deg");
+    expect(css.startsWith("linear-gradient(90deg,")).toBe(true);
+    expect(css).toContain(getColorScaleStops("LOAD")[0]!.color);
+  });
+});

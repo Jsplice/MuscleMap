@@ -43,6 +43,7 @@ export const MALE_FRONT: BodyDiagram = {
   regionBox: {
     UPPER_BODY: "170 39 680 729",
     LOWER_BODY: "170 633 680 817",
+    CORE: "366 424 291 337",
   },
   outline: OUTLINE,
   muscles: MUSCLES,

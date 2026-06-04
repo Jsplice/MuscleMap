@@ -22,7 +22,11 @@ SOFTWARE.
 
 ---
 
-Note on body assets: the body image/SVG assets bundled for the demo are not
-covered by blanket reuse. Production body graphics must be licensed for
-commercial use and modification. Do not redistribute copied anatomy graphics
-without appropriate rights.
+Scope of this license:
+
+- The MIT license above covers all source code in this repository, including
+  the SVG muscle path data in `packages/assets` (original traced vector work).
+- The demo body photographs in `apps/playground/public/` (e.g. `bg-male-*.png`)
+  are AI-generated assets used only by the (private, unpublished) playground.
+  They are NOT part of any published npm package and are not redistributed by
+  them. For your own deployment, provide your own body images.
