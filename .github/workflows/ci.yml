@@ -38,5 +38,22 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Pack (dry-run) — verify published file lists
-        run: pnpm --filter "./packages/*" -r exec npm pack --dry-run
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level high
+
+      - name: Pack & verify publishable tarballs
+        # pnpm pack rewrites `workspace:*` to concrete versions (npm pack does not).
+        # Guard that no tarball ships an unresolved workspace: dependency.
+        run: |
+          pnpm --filter "./packages/*" -r pack   # tarballs are written to the repo root
+          fail=0
+          for tgz in *.tgz; do
+            echo "── $tgz ──"
+            tar -xzOf "$tgz" package/package.json
+            if tar -xzOf "$tgz" package/package.json | grep -q '"workspace:'; then
+              echo "ERROR: $tgz contains an unresolved workspace: dependency"
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then exit 1; fi
+          echo "All package tarballs have resolved (non-workspace) dependencies."

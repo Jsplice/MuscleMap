@@ -5,6 +5,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 
+# Package tarballs (pnpm pack output)
+*.tgz
+
 # Vite
 .vite/
 apps/*/dist/
