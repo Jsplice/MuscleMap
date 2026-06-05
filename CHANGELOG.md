@@ -1,9 +1,17 @@
 # Changelog
 
 All notable changes to this project are documented here.
-The format is based on [Keep a Changelog](https://keepachangelog.com/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
+project adheres to [Semantic Versioning](https://semver.org/). Releases are
+managed with [Changesets](https://github.com/changesets/changesets).
 
 ## [Unreleased]
+
+_Nothing yet._
+
+## [0.1.0] - 2026-06-05
+
+First public (early-alpha) release.
 
 ### Added
 - **Female** front & back bodies (own traced geometry, not a male reuse).

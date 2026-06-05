@@ -31,5 +31,22 @@ Bodies are traced in Inkscape and imported as a `BodyDiagram` (see the README's 
 
 - Keep core UI-free and typed (the repo uses `strict` + `exactOptionalPropertyTypes`).
 - Add/adjust tests for behavior changes (`packages/*/src/**/*.test.ts`).
-- `pnpm build && pnpm typecheck && pnpm test` must pass — CI runs the same.
-- Note any public API change in `CHANGELOG.md`.
+- `pnpm build && pnpm typecheck && pnpm test && pnpm lint` must pass — CI runs the same.
+- For any change to a published package, **add a changeset** (see below).
+
+## Releasing (Changesets)
+
+Versioning and publishing are automated with
+[Changesets](https://github.com/changesets/changesets). The three packages are a
+**fixed group** — they always share one version and release together.
+
+1. In your PR, run `pnpm changeset` and pick the bump (patch / minor / major) and
+   write a short summary. Commit the generated file in `.changeset/`.
+2. When the PR merges to `main`, the Release workflow opens (or updates) a
+   **"Version Packages"** PR that applies the bumps and updates each package's
+   `CHANGELOG.md`.
+3. Merging that PR publishes the packages to npm (with provenance).
+
+The root `CHANGELOG.md` is the human-facing overview; Changesets maintains the
+per-package changelogs. Publishing needs an `NPM_TOKEN` repository secret; until
+it's set, the workflow only manages the version PR and publishes nothing.
