@@ -1,6 +1,6 @@
 {
   "name": "@musclemap/core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Headless core for MuscleMap — muscle-group types, color scales and region/visibility rules. UI-free.",
   "license": "MIT",
   "type": "module",
@@ -12,12 +12,21 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["musclemap", "muscle", "anatomy", "heatmap", "fitness", "headless"],
+  "keywords": [
+    "musclemap",
+    "muscle",
+    "anatomy",
+    "heatmap",
+    "fitness",
+    "headless"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Jsplice/MuscleMap.git",

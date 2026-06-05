@@ -1,6 +1,6 @@
 {
   "name": "@musclemap/assets",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Body diagrams for MuscleMap — segmented muscle SVG path data with semantic IDs and region viewBoxes. Framework-free.",
   "license": "MIT",
   "type": "module",
@@ -13,12 +13,21 @@
     },
     "./bodies/*": "./bodies/*"
   },
-  "files": ["dist", "bodies"],
+  "files": [
+    "dist",
+    "bodies"
+  ],
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["musclemap", "muscle", "anatomy", "svg", "body"],
+  "keywords": [
+    "musclemap",
+    "muscle",
+    "anatomy",
+    "svg",
+    "body"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Jsplice/MuscleMap.git",
