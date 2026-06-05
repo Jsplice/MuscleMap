@@ -140,8 +140,8 @@ Pass a body photo as the background; it's clipped to the silhouette and (optiona
 Four ready-to-use body photos ship with **`@musclemap/assets`** (import them as asset URLs), or pass any URL of your own:
 
 ```tsx
-import maleFront from "@musclemap/assets/bodies/male-front.png";
-import maleBack  from "@musclemap/assets/bodies/male-back.png";
+import maleFront from "@musclemap/assets/bodies/male-front.webp";
+import maleBack  from "@musclemap/assets/bodies/male-back.webp";
 
 <MuscleMap
   values={values}
@@ -260,7 +260,7 @@ A `BodyDiagram` is just SVG path data with semantic IDs. To add or replace a bod
 
 Each labelled surface becomes individually addressable; the coarse `group` (mapped from the label) enables region filtering and bundled coloring.
 
-> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work. The four **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they ship in `@musclemap/assets` (`bodies/*.png`, importable as asset URLs) and are MIT too. They're AI-generated demo bodies — swap in your own for production. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
+> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work. The four **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they ship in `@musclemap/assets` (`bodies/*.webp`, importable as asset URLs) and are MIT too. They're AI-generated demo bodies — swap in your own for production. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
 
 ---
 
@@ -290,7 +290,7 @@ a `workspace:` dependency.
 
 **MIT — and it covers everything in this repository**: all source code, the
 traced SVG muscle path data in `@musclemap/assets`, **and** the four body photos
-bundled in `@musclemap/assets` (`bodies/*.png`, generated with OpenAI image
+bundled in `@musclemap/assets` (`bodies/*.webp`, generated with OpenAI image
 tooling from the maintainer's own prompts, then manually edited). All of it is
 free to use, modify and redistribute. See [`LICENSE`](LICENSE) and
 [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
