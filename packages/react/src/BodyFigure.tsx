@@ -1,7 +1,7 @@
 import { memo } from "react";
 import type { CSSProperties } from "react";
 import type { MuscleColorModel, MuscleGroup, MuscleMapValue, MuscleMapValues } from "@musclemap/core";
-import { getMuscleHeatColor } from "@musclemap/core";
+import { getMonochromeColor, getMuscleHeatColor } from "@musclemap/core";
 import type { BodyDiagram, MusclePath } from "@musclemap/assets";
 
 const NEUTRAL_BASE = "#33405a";
@@ -18,6 +18,10 @@ export type BodyFigureProps = {
   /** Optional per-surface overrides (keyed by path id); take precedence over group values. */
   partValues?: PartValues;
   colorModel: MuscleColorModel;
+  /** When set, ignore `colorModel` and tint with a single-color grey→`monochromeColor` scale. */
+  monochromeColor?: string;
+  /** Base color at score 0 for the monochrome scale (defaults to a neutral grey). */
+  monochromeBaseColor?: string;
   visibleGroups: ReadonlySet<MuscleGroup>;
   activeGroup: MuscleGroup | null;
   glow: boolean;
@@ -77,6 +81,8 @@ function BodyFigureImpl({
   values,
   partValues,
   colorModel,
+  monochromeColor,
+  monochromeBaseColor,
   visibleGroups,
   activeGroup,
   glow,
@@ -100,12 +106,18 @@ function BodyFigureImpl({
   const clipId = `${idPrefix}-bodyclip`;
   const [vbX, vbY, vbW, vbH] = diagram.viewBox.split(/\s+/).map(Number);
 
+  // Single-color scale (grey -> monochromeColor) when set, else the model heatmap.
+  const colorForScore = (score: number): string =>
+    monochromeColor
+      ? getMonochromeColor(score, monochromeColor, monochromeBaseColor)
+      : getMuscleHeatColor(score, colorModel);
+
   // Resolve each rendered surface to a value (per-surface override -> group value)
   // and a heatmap color. Visibility is decided by the coarse group.
   const resolved = diagram.muscles.flatMap(expandMuscle).map((m) => {
     const visible = visibleGroups.has(m.group);
     const value = (m.partId ? partValues?.[m.partId] : undefined) ?? values[m.group];
-    const color = visible && value ? getMuscleHeatColor(value.score, colorModel) : null;
+    const color = visible && value ? colorForScore(value.score) : null;
     return { ...m, visible, value, color };
   });
 

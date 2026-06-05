@@ -120,3 +120,45 @@ export function getColorScaleCss(model: MuscleColorModel = "LOAD", angle = "90de
     .join(", ");
   return `linear-gradient(${angle}, ${stops})`;
 }
+
+/** Default "empty" color at score 0 for the monochrome scale (a neutral grey). */
+export const DEFAULT_MONOCHROME_BASE = "#6b7280";
+
+/**
+ * Single-color (monochrome) scale: linearly interpolates `baseColor` (score 0,
+ * a neutral grey by default) → `color` (score 100). Use it to tint the body in
+ * one brand color, e.g. grey → blue.
+ *
+ * ```ts
+ * getMonochromeColor(0, "#2f7bff");    // "#6b7280" (grey)
+ * getMonochromeColor(100, "#2f7bff");  // "#2f7bff" (full color)
+ * getMonochromeColor(50, "#2f7bff");   // halfway blend
+ * ```
+ */
+export function getMonochromeColor(
+  score: number,
+  color: string,
+  baseColor: string = DEFAULT_MONOCHROME_BASE,
+): string {
+  return mix(baseColor, color, clampScore(score) / 100);
+}
+
+/** Gradient stops for a monochrome scale (base grey → `color`). */
+export function getMonochromeScaleStops(
+  color: string,
+  baseColor: string = DEFAULT_MONOCHROME_BASE,
+): ColorStop[] {
+  return [
+    { offset: 0, color: baseColor },
+    { offset: 1, color },
+  ];
+}
+
+/** CSS `linear-gradient(...)` for a monochrome scale (base grey → `color`). */
+export function getMonochromeScaleCss(
+  color: string,
+  angle = "90deg",
+  baseColor: string = DEFAULT_MONOCHROME_BASE,
+): string {
+  return `linear-gradient(${angle}, ${baseColor} 0%, ${color} 100%)`;
+}

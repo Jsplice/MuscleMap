@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { getColorScaleCss, getColorScaleStops, getMuscleHeatColor } from "./heat-colors";
+import {
+  DEFAULT_MONOCHROME_BASE,
+  getColorScaleCss,
+  getColorScaleStops,
+  getMonochromeColor,
+  getMonochromeScaleCss,
+  getMuscleHeatColor,
+} from "./heat-colors";
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -54,5 +61,39 @@ describe("getColorScaleStops / getColorScaleCss", () => {
     const css = getColorScaleCss("LOAD", "90deg");
     expect(css.startsWith("linear-gradient(90deg,")).toBe(true);
     expect(css).toContain(getColorScaleStops("LOAD")[0]!.color);
+  });
+});
+
+describe("getMonochromeColor", () => {
+  const BLUE = "#2f7bff";
+
+  it("returns the base grey at 0 and the full color at 100", () => {
+    expect(getMonochromeColor(0, BLUE)).toBe(DEFAULT_MONOCHROME_BASE);
+    expect(getMonochromeColor(100, BLUE)).toBe(BLUE);
+  });
+
+  it("clamps out-of-range and non-finite scores to the endpoints", () => {
+    expect(getMonochromeColor(-20, BLUE)).toBe(DEFAULT_MONOCHROME_BASE);
+    expect(getMonochromeColor(Number.NaN, BLUE)).toBe(DEFAULT_MONOCHROME_BASE);
+    expect(getMonochromeColor(999, BLUE)).toBe(BLUE);
+  });
+
+  it("blends toward the color for mid scores (valid hex, not an endpoint)", () => {
+    const mid = getMonochromeColor(50, BLUE);
+    expect(mid).toMatch(HEX);
+    expect(mid).not.toBe(DEFAULT_MONOCHROME_BASE);
+    expect(mid).not.toBe(BLUE);
+  });
+
+  it("accepts a custom base color", () => {
+    expect(getMonochromeColor(0, BLUE, "#ffffff")).toBe("#ffffff");
+    expect(getMonochromeColor(100, BLUE, "#ffffff")).toBe(BLUE);
+  });
+
+  it("builds a base→color CSS gradient", () => {
+    const css = getMonochromeScaleCss(BLUE, "90deg");
+    expect(css.startsWith("linear-gradient(90deg,")).toBe(true);
+    expect(css).toContain(DEFAULT_MONOCHROME_BASE);
+    expect(css).toContain(BLUE);
   });
 });

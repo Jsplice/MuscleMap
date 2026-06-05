@@ -29,6 +29,13 @@ export type MuscleMapProps = {
   view?: MuscleMapView;
   region?: MuscleMapRegion;
   colorModel?: MuscleColorModel;
+  /**
+   * Single-color override. When set, the body is tinted with a grey→`monochromeColor`
+   * scale (0–100) and `colorModel` is ignored — e.g. `"#2f7bff"` for grey→blue.
+   */
+  monochromeColor?: string;
+  /** Base color at score 0 for the monochrome scale (defaults to a neutral grey). */
+  monochromeBaseColor?: string;
   glow?: boolean;
   showLegend?: boolean;
   legendMinLabel?: string;
@@ -79,6 +86,8 @@ export function MuscleMap({
   view = "BOTH",
   region = "FULL_BODY",
   colorModel = "LOAD",
+  monochromeColor,
+  monochromeBaseColor,
   glow = true,
   showLegend = true,
   legendMinLabel,
@@ -172,6 +181,8 @@ export function MuscleMap({
             values={values}
             {...(partValues ? { partValues } : {})}
             colorModel={colorModel}
+            {...(monochromeColor ? { monochromeColor } : {})}
+            {...(monochromeBaseColor ? { monochromeBaseColor } : {})}
             visibleGroups={visibleByView.get(v)!}
             activeGroup={active?.group ?? null}
             glow={glow}
@@ -192,6 +203,8 @@ export function MuscleMap({
       {showLegend && (
         <MuscleMapLegend
           colorModel={colorModel}
+          {...(monochromeColor ? { monochromeColor } : {})}
+          {...(monochromeBaseColor ? { monochromeBaseColor } : {})}
           {...(legendMinLabel !== undefined ? { minLabel: legendMinLabel } : {})}
           {...(legendMaxLabel !== undefined ? { maxLabel: legendMaxLabel } : {})}
           style={{ width: "min(100%, 320px)" }}
