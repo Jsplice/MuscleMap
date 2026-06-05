@@ -9,7 +9,17 @@ import type {
 import { getMuscleHeatColor, getVisibleMuscleGroups } from "@musclemap/core";
 import { MuscleMap } from "@musclemap/react";
 import type { TooltipField } from "@musclemap/react";
+// Bundled photoreal body photos, imported straight from the package (dogfoods the ./bodies export).
+import maleFront from "@musclemap/assets/bodies/male-front.png";
+import maleBack from "@musclemap/assets/bodies/male-back.png";
+import femaleFront from "@musclemap/assets/bodies/female-front.png";
+import femaleBack from "@musclemap/assets/bodies/female-back.png";
 import { DEMO_BY_MODE, MUSCLE_LABELS_DE } from "./demo-data";
+
+const BODY_PHOTOS: Record<MuscleMapSex, { front: string; back: string }> = {
+  MALE: { front: maleFront, back: maleBack },
+  FEMALE: { front: femaleFront, back: femaleBack },
+};
 import {
   IconAnalytics,
   IconCalendar,
@@ -219,8 +229,8 @@ export function App() {
               backgroundBrightness={bgBright}
               {...(showBackground
                 ? {
-                    backgroundImageFront: `/bg-${sex.toLowerCase()}-front.png`,
-                    backgroundImageBack: `/bg-${sex.toLowerCase()}-back.png`,
+                    backgroundImageFront: BODY_PHOTOS[sex].front,
+                    backgroundImageBack: BODY_PHOTOS[sex].back,
                   }
                 : {})}
             />

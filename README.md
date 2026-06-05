@@ -137,16 +137,23 @@ The selection callback reports the surface too, so you can react to a specific l
 
 Pass a body photo as the background; it's clipped to the silhouette and (optionally) desaturated, with the colored muscles on top — pixel-aligned because both come from the same trace.
 
+Four ready-to-use body photos ship with **`@musclemap/assets`** (import them as asset URLs), or pass any URL of your own:
+
 ```tsx
+import maleFront from "@musclemap/assets/bodies/male-front.png";
+import maleBack  from "@musclemap/assets/bodies/male-back.png";
+
 <MuscleMap
   values={values}
-  backgroundImageFront="/bodies/male-front.png"
-  backgroundImageBack="/bodies/male-back.png"
+  backgroundImageFront={maleFront}
+  backgroundImageBack={maleBack}
   backgroundGrayscale          // strip the photo's colors → neutral grey body
-  backgroundBrightness={1.6}
-  backgroundOpacity={0.7}
+  backgroundBrightness={1.2}
+  backgroundOpacity={0.45}
 />
 ```
+
+> The bundled photos are AI-generated demo bodies (MIT). For production/marketing, swap in your own branded imagery — `backgroundImage*` takes any URL.
 
 ---
 
@@ -230,7 +237,7 @@ A `BodyDiagram` is just SVG path data with semantic IDs. To add or replace a bod
 
 Each labelled surface becomes individually addressable; the coarse `group` (mapped from the label) enables region filtering and bundled coloring.
 
-> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work (the package's `files` field is `["dist"]`, so only path data — no images — is published). The **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they live in `apps/playground/public/` and are MIT too — copy them straight from the repo, or supply your own. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
+> **Licensing:** **Everything is MIT — free to use, modify and redistribute.** The traced **SVG path data** in `@musclemap/assets` is original work. The four **body photographs** used for the hybrid look were **generated with OpenAI image tooling from the maintainer's own prompts and then manually edited/traced**; they ship in `@musclemap/assets` (`bodies/*.png`, importable as asset URLs) and are MIT too. They're AI-generated demo bodies — swap in your own for production. Full breakdown: [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
 
 ---
 
@@ -259,8 +266,8 @@ a `workspace:` dependency.
 ## License
 
 **MIT — and it covers everything in this repository**: all source code, the
-traced SVG muscle path data in `@musclemap/assets`, **and** the body photos in
-`apps/playground/public/` (generated with OpenAI image tooling from the
-maintainer's own prompts, then manually edited). All of it is free to use,
-modify and redistribute. See [`LICENSE`](LICENSE) and
+traced SVG muscle path data in `@musclemap/assets`, **and** the four body photos
+bundled in `@musclemap/assets` (`bodies/*.png`, generated with OpenAI image
+tooling from the maintainer's own prompts, then manually edited). All of it is
+free to use, modify and redistribute. See [`LICENSE`](LICENSE) and
 [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md).
