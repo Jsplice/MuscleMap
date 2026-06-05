@@ -74,7 +74,7 @@ Host app training data
 pnpm add @musclemap/react @musclemap/core @musclemap/assets react react-dom
 ```
 
-## Quick start (Anbindung)
+## Quick start
 
 Feed `values` keyed by [`MuscleGroup`](packages/core/src/types.ts), each with a `score` from 0–100. That's the whole contract.
 
@@ -150,7 +150,7 @@ Pass a body photo as the background; it's clipped to the silhouette and (optiona
 
 ---
 
-## Views (Ganzkörper / Oberkörper / Unterkörper)
+## Views (full / upper / lower body)
 
 Set `region` and turn on `cropToRegion` to get a **real cropped view**, not just a zoom — the figure only occupies the space of its region and out-of-region muscles are inactive.
 
