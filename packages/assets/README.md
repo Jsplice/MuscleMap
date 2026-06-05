@@ -31,11 +31,30 @@ getMuscleSurfaceIds(diagram);
 Direct diagram exports are also available: `MALE_FRONT`, `MALE_BACK`,
 `FEMALE_FRONT`, `FEMALE_BACK`.
 
+## Body photos (photoreal hybrid)
+
+This package also **bundles four reference body photos** for the photoreal-hybrid
+look, importable as asset URLs (your bundler fingerprints/serves them):
+
+```ts
+import maleFront   from "@musclemap/assets/bodies/male-front.png";
+import maleBack    from "@musclemap/assets/bodies/male-back.png";
+import femaleFront from "@musclemap/assets/bodies/female-front.png";
+import femaleBack  from "@musclemap/assets/bodies/female-back.png";
+
+// then, with @musclemap/react:
+// <MuscleMap backgroundImageFront={maleFront} backgroundImageBack={maleBack} … />
+```
+
+> These photos are **AI-generated demo bodies** (MIT-licensed) — great to get the
+> look running immediately. For production/marketing you may want to swap in your
+> own branded imagery; `backgroundImage*` takes any URL.
+
 ## What ships
 
-Only compiled path data (the package's `files` field is `["dist"]`). The path
-data is **original work**, hand-traced in Inkscape. The reference body photos used
-for the photoreal-hybrid look are **not** part of this package — see
+Compiled path data (`dist`) **and** the four body photos (`bodies/*.png`). The
+path data is **original work**, hand-traced in Inkscape; the photos are
+AI-generated and manually edited. Both are MIT. See
 [ASSET_PROVENANCE.md](https://github.com/Jsplice/MuscleMap/blob/main/ASSET_PROVENANCE.md).
 
 Full docs and the trace/import workflow: **https://github.com/Jsplice/MuscleMap**

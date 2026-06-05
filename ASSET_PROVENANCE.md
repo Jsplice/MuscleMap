@@ -21,40 +21,45 @@ semantic IDs (`CHEST_LEFT`, `TRAPEZIUS_LEFT`, `BODY`, …).
 
 ## 2. Reference body photographs — OpenAI-generated, MIT
 
-The greyscale "photoreal hybrid" look is backed by four reference photos:
+The greyscale "photoreal hybrid" look is backed by four reference photos. They
+are **bundled in the published `@musclemap/assets` package** and importable as
+asset URLs:
 
 ```
-apps/playground/public/bg-male-front.png
-apps/playground/public/bg-male-back.png
-apps/playground/public/bg-female-front.png
-apps/playground/public/bg-female-back.png
+@musclemap/assets/bodies/male-front.png
+@musclemap/assets/bodies/male-back.png
+@musclemap/assets/bodies/female-front.png
+@musclemap/assets/bodies/female-back.png
 ```
+
+(Source of truth in the repo: `packages/assets/bodies/`. The playground imports
+them straight from the package.)
 
 These were **generated with OpenAI image tooling from the maintainer's own
 prompts and then manually edited/traced over** to produce the muscle geometry
 above.
 
 - **License:** MIT — free to use, copy, modify and redistribute.
-- **Where they live:** in the repository under `apps/playground/public/`. The
-  playground itself is a private, unpublished demo, so the PNGs are not bundled
-  into any npm tarball — but they are part of this MIT-licensed repo, so you can
-  copy them straight from here if you want the same look.
+- **Shipped:** yes — they are part of the `@musclemap/assets` npm tarball
+  (`files` includes `bodies`). Importing one gives your bundler a fingerprinted
+  asset URL to pass to `backgroundImage*`.
 - **Note on AI output:** under OpenAI's terms the maintainer owns the output to
-  the extent permitted by law. Generated output is not guaranteed to be unique;
-  as with any asset, satisfy yourself that it fits your use case before shipping.
+  the extent permitted by law. Generated output is not guaranteed to be unique.
+  They are **demo bodies** — for production/marketing, consider swapping in your
+  own branded imagery; `backgroundImage*` accepts any URL.
 
 ## What this means for you
 
 - **Using `@musclemap/react` / `@musclemap/core` / `@musclemap/assets`:** you
-  get MIT-licensed code and MIT-licensed muscle path data — no caveats.
-- **Want the photoreal hybrid look:** either copy the MIT-licensed reference
-  photos from `apps/playground/public/`, or supply your own image via the
-  `backgroundImageFront` / `backgroundImageBack` props (see the README).
+  get MIT-licensed code, muscle path data, **and** four ready-to-use body photos.
+- **Want the photoreal hybrid look:** import a photo from
+  `@musclemap/assets/bodies/*.png` (or supply your own image) and pass it to the
+  `backgroundImageFront` / `backgroundImageBack` props.
 
 ## Summary
 
 | Asset | Origin | License | In npm tarball? |
 |---|---|---|---|
-| Muscle SVG path data (`@musclemap/assets`) | Original, traced in Inkscape | MIT | ✅ yes (`dist` only) |
-| Body reference photos (`bg-*.png`) | OpenAI-generated + manually edited | **MIT** | ❌ repo only (playground), still MIT |
+| Muscle SVG path data (`@musclemap/assets`) | Original, traced in Inkscape | MIT | ✅ yes (`dist`) |
+| Body reference photos (`bodies/*.png`) | OpenAI-generated + manually edited | **MIT** | ✅ yes (`@musclemap/assets`) |
 | All source code | Original | MIT | ✅ yes |
