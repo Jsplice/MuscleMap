@@ -74,7 +74,7 @@ Host app training data
 pnpm add @musclemap/react @musclemap/core @musclemap/assets react react-dom
 ```
 
-## Quick start (Anbindung)
+## Quick start
 
 Feed `values` keyed by [`MuscleGroup`](packages/core/src/types.ts), each with a `score` from 0–100. That's the whole contract.
 
@@ -157,7 +157,7 @@ import maleBack  from "@musclemap/assets/bodies/male-back.png";
 
 ---
 
-## Views (Ganzkörper / Oberkörper / Unterkörper)
+## Views (full / upper / lower body)
 
 Set `region` and turn on `cropToRegion` to get a **real cropped view**, not just a zoom — the figure only occupies the space of its region and out-of-region muscles are inactive.
 
@@ -202,6 +202,27 @@ getMuscleHeatColor(72, "LOAD");        // "#f9a..." smooth interpolation
 getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 ```
 
+### Single-color (monochrome) scale
+
+Prefer one brand color over the multi-hue ramps? Set `monochromeColor` — the body and legend then run a single grey → color scale (0–100). `colorModel` is ignored while it's set.
+
+```tsx
+// 0 = grey → 100 = your blue
+<MuscleMap values={values} monochromeColor="#2f7bff" />
+
+// optional: override the score-0 base color
+<MuscleMap values={values} monochromeColor="#2f7bff" monochromeBaseColor="#e5e7eb" />
+```
+
+```ts
+import { getMonochromeColor, getMonochromeScaleCss } from "@musclemap/core";
+
+getMonochromeColor(0, "#2f7bff");      // "#6b7280" (grey base)
+getMonochromeColor(100, "#2f7bff");    // "#2f7bff" (full color)
+getMonochromeColor(50, "#2f7bff");     // halfway blend
+getMonochromeScaleCss("#2f7bff");      // "linear-gradient(90deg, #6b7280 0%, #2f7bff 100%)"
+```
+
 ---
 
 ## `<MuscleMap />` props
@@ -215,6 +236,8 @@ getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 | `region` | `"FULL_BODY" \| "UPPER_BODY" \| "LOWER_BODY" \| "CORE"` | `"FULL_BODY"` | Active region. |
 | `cropToRegion` | `boolean` | `false` | Crop the figure to `region`. |
 | `colorModel` | `"LOAD" \| "FREQUENCY" \| "BALANCE" \| "RECOVERY_RISK"` | `"LOAD"` | Heatmap scale. |
+| `monochromeColor` | `string` | — | Single-color override: tints the body/legend with a grey→color scale (0–100). Overrides `colorModel`. |
+| `monochromeBaseColor` | `string` | `"#6b7280"` | Base color at score 0 for the monochrome scale. |
 | `glow` | `boolean` | `true` | Glow halo behind active muscles. |
 | `showLegend` | `boolean` | `true` | Render the gradient legend. |
 | `tooltipFields` | `TooltipField[]` | `["group","score"]` | What the hover/tap tooltip shows. |

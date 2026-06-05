@@ -1,10 +1,14 @@
 import type { CSSProperties } from "react";
 import type { MuscleColorModel } from "@musclemap/core";
-import { getColorScaleCss } from "@musclemap/core";
+import { getColorScaleCss, getMonochromeScaleCss } from "@musclemap/core";
 import { DEFAULT_LEGEND_LABELS } from "./labels";
 
 export type MuscleMapLegendProps = {
   colorModel?: MuscleColorModel;
+  /** When set, the bar shows the grey→`monochromeColor` scale instead of `colorModel`. */
+  monochromeColor?: string;
+  /** Base color at score 0 for the monochrome scale. */
+  monochromeBaseColor?: string;
   minLabel?: string;
   maxLabel?: string;
   /** "horizontal" (default) renders a wide bar; "vertical" a tall one. */
@@ -15,6 +19,8 @@ export type MuscleMapLegendProps = {
 
 export function MuscleMapLegend({
   colorModel = "LOAD",
+  monochromeColor,
+  monochromeBaseColor,
   minLabel,
   maxLabel,
   orientation = "horizontal",
@@ -26,7 +32,10 @@ export function MuscleMapLegend({
   const max = maxLabel ?? defaults.max;
   const vertical = orientation === "vertical";
 
-  const gradient = getColorScaleCss(colorModel, vertical ? "0deg" : "90deg");
+  const angle = vertical ? "0deg" : "90deg";
+  const gradient = monochromeColor
+    ? getMonochromeScaleCss(monochromeColor, angle, monochromeBaseColor)
+    : getColorScaleCss(colorModel, angle);
 
   const containerStyle: CSSProperties = {
     display: "flex",

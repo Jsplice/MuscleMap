@@ -137,6 +137,8 @@ export function App() {
   const [bgOpacity, setBgOpacity] = useState(0.45);
   const [bgGray, setBgGray] = useState(true);
   const [bgBright, setBgBright] = useState(1.2);
+  const [monoOn, setMonoOn] = useState(false);
+  const [monoColor, setMonoColor] = useState("#2f7bff"); // RepMap-Blau
 
   const values = DEMO_BY_MODE[mode];
   const colorModel = modelOverride ?? DEFAULT_MODEL[mode];
@@ -219,6 +221,7 @@ export function App() {
               view={view}
               region={region}
               colorModel={colorModel}
+              {...(monoOn ? { monochromeColor: monoColor } : {})}
               cropToRegion
               tooltipFields={tooltipFields}
               legendMinLabel={legend.min}
@@ -315,6 +318,23 @@ export function App() {
         <button className="reset" type="button" onClick={() => setModelOverride(null)}>
           Farbmodell zurücksetzen
         </button>
+
+        <label>Einfarbig (überschreibt Farbmodell)</label>
+        <div className="checks">
+          <label className="check">
+            <input type="checkbox" checked={monoOn} onChange={(e) => setMonoOn(e.target.checked)} />
+            Einfarbige Skala (0 = grau → 100 = Farbe)
+          </label>
+          <label className="check" style={{ opacity: monoOn ? 1 : 0.5 }}>
+            <input
+              type="color"
+              value={monoColor}
+              disabled={!monoOn}
+              onChange={(e) => setMonoColor(e.target.value)}
+            />
+            Farbe ({monoColor})
+          </label>
+        </div>
 
         <label>Hover-Inhalt</label>
         <div className="checks">
