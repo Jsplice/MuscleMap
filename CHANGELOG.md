@@ -21,6 +21,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
   **Everything is MIT** — original muscle path data and the OpenAI-generated,
   manually-edited body photos alike, all free to use and redistribute.
 - README status/CI/license badges.
+- **SonarQube/SonarJS linting** — ESLint flat config with `eslint-plugin-sonarjs`
+  + `typescript-eslint`, enforced in CI (`pnpm lint`). Generated diagram data is
+  excluded.
+
+### Changed
+- Refactored `getMuscleColor` to a data-driven stepped-scale table (cognitive
+  complexity 36 → within the SonarJS limit); behavior unchanged.
+- Playground dev deps bumped: `vite` 6 → 8, `@vitejs/plugin-react` 4 → 6.
+- CI Node 20 → 22 (matches `vite` 8's runtime requirement).
 
 ### Fixed
 - `CORE` region no longer returns an empty set (muscles can belong to multiple
