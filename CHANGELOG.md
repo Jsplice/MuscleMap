@@ -24,12 +24,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - **SonarQube/SonarJS linting** — ESLint flat config with `eslint-plugin-sonarjs`
   + `typescript-eslint`, enforced in CI (`pnpm lint`). Generated diagram data is
   excluded.
+- Publish hardening: `publishConfig.access: "public"` on all packages; CI now
+  packs the tarballs and fails if any ships an unresolved `workspace:` dependency.
+- `.github/dependabot.yml` (weekly npm + github-actions updates) and a CI
+  `pnpm audit --prod` gate.
+- README: "Publishing" notes and an `onSelectMuscle` example.
 
 ### Changed
 - Refactored `getMuscleColor` to a data-driven stepped-scale table (cognitive
   complexity 36 → within the SonarJS limit); behavior unchanged.
 - Playground dev deps bumped: `vite` 6 → 8, `@vitejs/plugin-react` 4 → 6.
 - CI Node 20 → 22 (matches `vite` 8's runtime requirement).
+- Package `tsconfig`s also exclude `src/**/*.test.tsx` (preventive — keeps any
+  future `.tsx` tests out of `dist`).
+
+### Fixed (docs)
+- README `onSelectMuscle` prop signature was stale (`(group, value) => void`);
+  now documents the `{ group, partId?, value? }` selection object the code emits.
 
 ### Fixed
 - `CORE` region no longer returns an empty set (muscles can belong to multiple

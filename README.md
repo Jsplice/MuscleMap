@@ -118,6 +118,21 @@ Color a whole group via `values`, or override an individual surface via `partVal
 />
 ```
 
+The selection callback reports the surface too, so you can react to a specific left/right click — `partId` is `undefined` when a bundled (whole-group) path is tapped:
+
+```tsx
+<MuscleMap
+  values={{ HAMSTRINGS: { score: 70 } }}
+  partValues={{
+    HAMSTRINGS_LEFT:  { score: 90 },
+    HAMSTRINGS_RIGHT: { score: 50 },
+  }}
+  onSelectMuscle={({ group, partId, value }) => {
+    console.log(group, partId, value?.score); // "HAMSTRINGS" "HAMSTRINGS_LEFT" 90
+  }}
+/>
+```
+
 ### Photoreal hybrid
 
 Pass a body photo as the background; it's clipped to the silhouette and (optionally) desaturated, with the colored muscles on top — pixel-aligned because both come from the same trace.
@@ -200,7 +215,7 @@ getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 | `backgroundImageFront` / `backgroundImageBack` | `string` | — | Body photo behind the figure. |
 | `backgroundGrayscale` / `backgroundBrightness` / `backgroundOpacity` | `boolean` / `number` / `number` | `false` / `1` / `1` | Background image treatment. |
 | `figureWidth` | `number` | `200` | Per-figure SVG width (px). |
-| `onSelectMuscle` | `(group, value) => void` | — | Fired on tap/click. |
+| `onSelectMuscle` | `(selection: { group: MuscleGroup; partId?: string; value?: MuscleMapValue }) => void` | — | Fired on tap/click with the selected muscle `group`, the optional surface `partId` (e.g. `HAMSTRINGS_LEFT`), and the resolved `value` (respecting `partValues`). |
 
 ---
 
@@ -226,7 +241,18 @@ pnpm install
 pnpm build       # build packages (core → assets → react)
 pnpm dev         # run the playground
 pnpm typecheck
+pnpm lint        # ESLint + SonarJS rules
+pnpm test        # vitest
 ```
+
+### Publishing
+
+The three packages depend on each other via the `workspace:*` protocol. Publish
+**with pnpm** (`pnpm -r publish` / `pnpm pack`) — it rewrites those to the
+concrete version (e.g. `0.1.0`) in the published tarball; plain `npm publish`
+does **not**. Each package sets `publishConfig.access: "public"` so the scoped
+packages publish publicly. CI packs the tarballs and fails if any still contains
+a `workspace:` dependency.
 
 ---
 
