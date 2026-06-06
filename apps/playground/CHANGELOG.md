@@ -1,5 +1,14 @@
 # @musclemap/playground
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [5332b0e]
+  - @musclemap/assets@0.3.0
+  - @musclemap/core@0.3.0
+  - @musclemap/react@0.3.0
+
 ## 0.1.1
 
 ### Patch Changes
