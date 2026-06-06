@@ -73,13 +73,18 @@ callback reports the surface too — `partId` is `undefined` for a bundled path.
 
 Pass a body photo as the background; it's clipped to the silhouette and
 (optionally) desaturated, with the colored muscles on top — pixel-aligned
-because both come from the same trace.
+because both come from the same trace. Four ready-to-use photos ship with
+[`@musclemap/assets`](https://www.npmjs.com/package/@musclemap/assets), or pass
+any URL of your own.
 
 ```tsx
+import maleFront from "@musclemap/assets/bodies/male-front.webp";
+import maleBack  from "@musclemap/assets/bodies/male-back.webp";
+
 <MuscleMap
   values={values}
-  backgroundImageFront="/bodies/male-front.png"
-  backgroundImageBack="/bodies/male-back.png"
+  backgroundImageFront={maleFront}
+  backgroundImageBack={maleBack}
   backgroundGrayscale
   backgroundBrightness={1.2}
   backgroundOpacity={0.45}

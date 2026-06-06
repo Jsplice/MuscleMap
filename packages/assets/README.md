@@ -37,10 +37,10 @@ This package also **bundles four reference body photos** for the photoreal-hybri
 look, importable as asset URLs (your bundler fingerprints/serves them):
 
 ```ts
-import maleFront   from "@musclemap/assets/bodies/male-front.png";
-import maleBack    from "@musclemap/assets/bodies/male-back.png";
-import femaleFront from "@musclemap/assets/bodies/female-front.png";
-import femaleBack  from "@musclemap/assets/bodies/female-back.png";
+import maleFront   from "@musclemap/assets/bodies/male-front.webp";
+import maleBack    from "@musclemap/assets/bodies/male-back.webp";
+import femaleFront from "@musclemap/assets/bodies/female-front.webp";
+import femaleBack  from "@musclemap/assets/bodies/female-back.webp";
 
 // then, with @musclemap/react:
 // <MuscleMap backgroundImageFront={maleFront} backgroundImageBack={maleBack} … />
@@ -52,7 +52,8 @@ import femaleBack  from "@musclemap/assets/bodies/female-back.png";
 
 ## What ships
 
-Compiled path data (`dist`) **and** the four body photos (`bodies/*.png`). The
+Compiled path data (`dist`) **and** the four body photos (`bodies/*.webp`, ~64 KB
+each). The
 path data is **original work**, hand-traced in Inkscape; the photos are
 AI-generated and manually edited. Both are MIT. See
 [ASSET_PROVENANCE.md](https://github.com/Jsplice/MuscleMap/blob/main/ASSET_PROVENANCE.md).

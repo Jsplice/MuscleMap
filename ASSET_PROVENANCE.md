@@ -26,10 +26,10 @@ are **bundled in the published `@musclemap/assets` package** and importable as
 asset URLs:
 
 ```
-@musclemap/assets/bodies/male-front.png
-@musclemap/assets/bodies/male-back.png
-@musclemap/assets/bodies/female-front.png
-@musclemap/assets/bodies/female-back.png
+@musclemap/assets/bodies/male-front.webp
+@musclemap/assets/bodies/male-back.webp
+@musclemap/assets/bodies/female-front.webp
+@musclemap/assets/bodies/female-back.webp
 ```
 
 (Source of truth in the repo: `packages/assets/bodies/`. The playground imports
@@ -53,7 +53,7 @@ above.
 - **Using `@musclemap/react` / `@musclemap/core` / `@musclemap/assets`:** you
   get MIT-licensed code, muscle path data, **and** four ready-to-use body photos.
 - **Want the photoreal hybrid look:** import a photo from
-  `@musclemap/assets/bodies/*.png` (or supply your own image) and pass it to the
+  `@musclemap/assets/bodies/*.webp` (or supply your own image) and pass it to the
   `backgroundImageFront` / `backgroundImageBack` props.
 
 ## Summary
@@ -61,5 +61,5 @@ above.
 | Asset | Origin | License | In npm tarball? |
 |---|---|---|---|
 | Muscle SVG path data (`@musclemap/assets`) | Original, traced in Inkscape | MIT | ✅ yes (`dist`) |
-| Body reference photos (`bodies/*.png`) | OpenAI-generated + manually edited | **MIT** | ✅ yes (`@musclemap/assets`) |
+| Body reference photos (`bodies/*.webp`) | OpenAI-generated + manually edited | **MIT** | ✅ yes (`@musclemap/assets`) |
 | All source code | Original | MIT | ✅ yes |
