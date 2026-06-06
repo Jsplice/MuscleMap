@@ -5,6 +5,7 @@ import {
   getColorScaleStops,
   getMonochromeColor,
   getMonochromeScaleCss,
+  getMonochromeScaleStops,
   getMuscleHeatColor,
 } from "./heat-colors";
 
@@ -88,6 +89,17 @@ describe("getMonochromeColor", () => {
   it("accepts a custom base color", () => {
     expect(getMonochromeColor(0, BLUE, "#ffffff")).toBe("#ffffff");
     expect(getMonochromeColor(100, BLUE, "#ffffff")).toBe(BLUE);
+  });
+
+  it("expands three-digit hex colors", () => {
+    expect(getMonochromeColor(100, "#09f")).toBe("#0099ff");
+    expect(getMonochromeColor(0, "#09f", "#fff")).toBe("#ffffff");
+  });
+
+  it("rejects unsupported CSS color formats instead of producing corrupt colors", () => {
+    expect(() => getMonochromeColor(50, "blue")).toThrow(TypeError);
+    expect(() => getMonochromeColor(50, "#12")).toThrow(TypeError);
+    expect(() => getMonochromeScaleStops("rgb(0 0 255)")).toThrow(TypeError);
   });
 
   it("builds a base→color CSS gradient", () => {

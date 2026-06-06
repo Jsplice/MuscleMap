@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import type {
   MuscleColorModel,
-  MuscleMapMode,
   MuscleMapRegion,
   MuscleMapSex,
   MuscleMapView,
@@ -15,6 +14,7 @@ import maleBack from "@musclemap/assets/bodies/male-back.webp";
 import femaleFront from "@musclemap/assets/bodies/female-front.webp";
 import femaleBack from "@musclemap/assets/bodies/female-back.webp";
 import { DEMO_BY_MODE, MUSCLE_LABELS_DE } from "./demo-data";
+import type { DemoMode } from "./demo-data";
 
 const BODY_PHOTOS: Record<MuscleMapSex, { front: string; back: string }> = {
   MALE: { front: maleFront, back: maleBack },
@@ -34,7 +34,7 @@ import {
   IconStrength,
 } from "./icons";
 
-const MODES: { id: MuscleMapMode; label: string; Icon: typeof IconOverall }[] = [
+const MODES: { id: DemoMode; label: string; Icon: typeof IconOverall }[] = [
   { id: "OVERALL", label: "Gesamt", Icon: IconOverall },
   { id: "STRENGTH", label: "Kraft", Icon: IconStrength },
   { id: "CARDIO", label: "Cardio", Icon: IconCardio },
@@ -75,7 +75,7 @@ const TOOLTIP_OPTIONS: { id: TooltipField; label: string }[] = [
   { id: "sets", label: "Sätze" },
 ];
 
-const DEFAULT_MODEL: Record<MuscleMapMode, MuscleColorModel> = {
+const DEFAULT_MODEL: Record<DemoMode, MuscleColorModel> = {
   OVERALL: "LOAD",
   STRENGTH: "BALANCE",
   CARDIO: "LOAD",
@@ -126,7 +126,7 @@ function Segmented<T extends string>({
 }
 
 export function App() {
-  const [mode, setMode] = useState<MuscleMapMode>("OVERALL");
+  const [mode, setMode] = useState<DemoMode>("OVERALL");
   const [period, setPeriod] = useState<(typeof PERIODS)[number]>("Woche");
   const [view, setView] = useState<MuscleMapView>("BOTH");
   const [region, setRegion] = useState<MuscleMapRegion>("FULL_BODY");

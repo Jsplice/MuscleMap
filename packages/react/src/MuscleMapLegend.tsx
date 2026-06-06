@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import type { MuscleColorModel } from "@musclemap/core";
 import { getColorScaleCss, getMonochromeScaleCss } from "@musclemap/core";
-import { DEFAULT_LEGEND_LABELS } from "./labels";
+import { DEFAULT_LEGEND_LABELS } from "./labels.js";
 
+/** Props for the standalone legend component. */
 export type MuscleMapLegendProps = {
   colorModel?: MuscleColorModel;
   /** When set, the bar shows the grey→`monochromeColor` scale instead of `colorModel`. */

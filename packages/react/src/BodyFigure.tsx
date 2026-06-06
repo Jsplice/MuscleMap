@@ -12,13 +12,14 @@ const STROKE = "rgba(6, 10, 18, 0.6)";
 /** Per-surface values, keyed by a muscle path's `id` (e.g. "TRAPEZIUS_LEFT"). */
 export type PartValues = Partial<Record<string, MuscleMapValue>>;
 
+/** @experimental Low-level rendering API that may change before 1.0. */
 export type BodyFigureProps = {
   diagram: BodyDiagram;
   values: MuscleMapValues;
   /** Optional per-surface overrides (keyed by path id); take precedence over group values. */
   partValues?: PartValues;
   colorModel: MuscleColorModel;
-  /** When set, ignore `colorModel` and tint with a single-color grey→`monochromeColor` scale. */
+  /** Hex color (#RGB or #RRGGBB) for a single-color scale that overrides `colorModel`. */
   monochromeColor?: string;
   /** Base color at score 0 for the monochrome scale (defaults to a neutral grey). */
   monochromeBaseColor?: string;
@@ -278,5 +279,8 @@ function BodyFigureImpl({
   );
 }
 
-/** Memoised so tooltip pointer-tracking in MuscleMap doesn't re-render the figures. */
+/**
+ * Low-level body renderer for advanced custom compositions.
+ * @experimental This API may change before 1.0.
+ */
 export const BodyFigure = memo(BodyFigureImpl);

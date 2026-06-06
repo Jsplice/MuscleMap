@@ -12,9 +12,9 @@ import type {
 import { getVisibleMuscleGroups } from "@musclemap/core";
 import { getBodyDiagram } from "@musclemap/assets";
 import type { BodyView } from "@musclemap/assets";
-import { BodyFigure } from "./BodyFigure";
-import type { PartValues } from "./BodyFigure";
-import { MuscleMapLegend } from "./MuscleMapLegend";
+import { BodyFigure } from "./BodyFigure.js";
+import type { PartValues } from "./BodyFigure.js";
+import { MuscleMapLegend } from "./MuscleMapLegend.js";
 
 /** Fields that can be shown in the hover/tap tooltip. */
 export type TooltipField = "group" | "score" | "trend" | "volumeKg" | "sets" | "sessions";
@@ -30,8 +30,8 @@ export type MuscleMapProps = {
   region?: MuscleMapRegion;
   colorModel?: MuscleColorModel;
   /**
-   * Single-color override. When set, the body is tinted with a grey→`monochromeColor`
-   * scale (0–100) and `colorModel` is ignored — e.g. `"#2f7bff"` for grey→blue.
+   * Single-color override in #RGB or #RRGGBB format. When set, the body is tinted
+   * with a grey→`monochromeColor` scale and `colorModel` is ignored.
    */
   monochromeColor?: string;
   /** Base color at score 0 for the monochrome scale (defaults to a neutral grey). */

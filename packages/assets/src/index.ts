@@ -1,15 +1,15 @@
 import type { MuscleMapSex } from "@musclemap/core";
-import { MALE_FRONT } from "./male-front";
-import { MALE_BACK } from "./male-back";
-import { FEMALE_FRONT } from "./female-front";
-import { FEMALE_BACK } from "./female-back";
-import type { BodyDiagram, BodyView } from "./types";
+import { MALE_FRONT } from "./male-front.js";
+import { MALE_BACK } from "./male-back.js";
+import { FEMALE_FRONT } from "./female-front.js";
+import { FEMALE_BACK } from "./female-back.js";
+import type { BodyDiagram, BodyView } from "./types.js";
 
-export * from "./types";
-export { MALE_FRONT } from "./male-front";
-export { MALE_BACK } from "./male-back";
-export { FEMALE_FRONT } from "./female-front";
-export { FEMALE_BACK } from "./female-back";
+export * from "./types.js";
+export { MALE_FRONT } from "./male-front.js";
+export { MALE_BACK } from "./male-back.js";
+export { FEMALE_FRONT } from "./female-front.js";
+export { FEMALE_BACK } from "./female-back.js";
 
 const DIAGRAMS: Record<MuscleMapSex, Record<BodyView, BodyDiagram>> = {
   MALE: { FRONT: MALE_FRONT, BACK: MALE_BACK },

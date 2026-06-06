@@ -1,4 +1,4 @@
-import type { MuscleColorModel } from "./types";
+import type { MuscleColorModel } from "./types.js";
 
 export type ColorStop = {
   /** Position on the 0..1 scale. */
@@ -57,8 +57,17 @@ const SCALES: Record<MuscleColorModel, ColorStop[]> = {
   ],
 };
 
+function normalizeHexColor(color: string): string {
+  if (/^#[0-9a-f]{6}$/i.test(color)) return color.toLowerCase();
+  if (/^#[0-9a-f]{3}$/i.test(color)) {
+    const [r, g, b] = color.slice(1);
+    return `#${r}${r}${g}${g}${b}${b}`.toLowerCase();
+  }
+  throw new TypeError(`Expected a hex color in #RGB or #RRGGBB format, received "${color}"`);
+}
+
 function hexToRgb(hex: string): [number, number, number] {
-  const value = hex.replace("#", "");
+  const value = normalizeHexColor(hex).slice(1);
   const r = parseInt(value.slice(0, 2), 16);
   const g = parseInt(value.slice(2, 4), 16);
   const b = parseInt(value.slice(4, 6), 16);
@@ -127,7 +136,7 @@ export const DEFAULT_MONOCHROME_BASE = "#6b7280";
 /**
  * Single-color (monochrome) scale: linearly interpolates `baseColor` (score 0,
  * a neutral grey by default) → `color` (score 100). Use it to tint the body in
- * one brand color, e.g. grey → blue.
+ * one brand color, e.g. grey → blue. Colors must use #RGB or #RRGGBB syntax.
  *
  * ```ts
  * getMonochromeColor(0, "#2f7bff");    // "#6b7280" (grey)
@@ -149,8 +158,8 @@ export function getMonochromeScaleStops(
   baseColor: string = DEFAULT_MONOCHROME_BASE,
 ): ColorStop[] {
   return [
-    { offset: 0, color: baseColor },
-    { offset: 1, color },
+    { offset: 0, color: normalizeHexColor(baseColor) },
+    { offset: 1, color: normalizeHexColor(color) },
   ];
 }
 
@@ -160,5 +169,6 @@ export function getMonochromeScaleCss(
   angle = "90deg",
   baseColor: string = DEFAULT_MONOCHROME_BASE,
 ): string {
-  return `linear-gradient(${angle}, ${baseColor} 0%, ${color} 100%)`;
+  const stops = getMonochromeScaleStops(color, baseColor);
+  return `linear-gradient(${angle}, ${stops[0]!.color} 0%, ${stops[1]!.color} 100%)`;
 }

@@ -1,5 +1,8 @@
 # @musclemap/assets
 
+[![npm version](https://img.shields.io/npm/v/@musclemap/assets.svg)](https://www.npmjs.com/package/@musclemap/assets)
+[![npm downloads](https://img.shields.io/npm/dm/@musclemap/assets.svg)](https://www.npmjs.com/package/@musclemap/assets)
+
 **Body diagrams for [MuscleMap](https://github.com/Jsplice/MuscleMap).** Segmented
 muscle **SVG path data** with semantic IDs and precomputed region viewBoxes —
 **framework-free**. Consumed by [`@musclemap/react`](https://www.npmjs.com/package/@musclemap/react),
@@ -45,6 +48,8 @@ import femaleBack  from "@musclemap/assets/bodies/female-back.webp";
 // then, with @musclemap/react:
 // <MuscleMap backgroundImageFront={maleFront} backgroundImageBack={maleBack} … />
 ```
+
+The package includes TypeScript declarations for these `.webp` subpath imports.
 
 > These photos are **AI-generated demo bodies** (MIT-licensed) — great to get the
 > look running immediately. For production/marketing you may want to swap in your
