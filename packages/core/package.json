@@ -1,6 +1,6 @@
 {
   "name": "@musclemap/core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Headless core for MuscleMap — muscle-group types, color scales and region/visibility rules. UI-free.",
   "license": "MIT",
   "type": "module",
