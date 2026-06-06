@@ -1,5 +1,8 @@
 # @musclemap/react
 
+[![npm version](https://img.shields.io/npm/v/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
+[![npm downloads](https://img.shields.io/npm/dm/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
+
 **Premium, data-driven muscle heatmaps for React.** Render the human body and
 color each muscle group by a 0–100 score — as a clean flat-vector figure **or**
 layered over a photorealistic body.
@@ -105,6 +108,10 @@ Set `region` and `cropToRegion` for a real cropped view (not just a zoom):
 `MuscleMap`, `MuscleMapLegend`, `BodyFigure`, `humanizeMuscleGroup`,
 `DEFAULT_LEGEND_LABELS`, `DEFAULT_TOOLTIP_FIELDS`, and the
 `MuscleMapProps` / `BodyFigureProps` / `PartValues` / `TooltipField` types.
+
+`MuscleMapLegend` is the standalone legend used by `MuscleMap`. `BodyFigure` is
+an experimental low-level renderer for advanced custom compositions and may
+change before `1.0`.
 
 Full prop table and docs: **https://github.com/Jsplice/MuscleMap**
 

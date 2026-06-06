@@ -17,6 +17,7 @@
     "dev": "pnpm --filter @musclemap/playground dev",
     "build": "pnpm --filter \"./packages/*\" -r build",
     "typecheck": "pnpm --filter \"./packages/*\" -r typecheck",
+    "verify:packages": "node scripts/verify-package-imports.mjs && tsc -p packages/react/consumer-tests/tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",

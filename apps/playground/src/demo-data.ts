@@ -1,4 +1,6 @@
-import type { MuscleGroup, MuscleMapMode, MuscleMapValues } from "@musclemap/core";
+import type { MuscleGroup, MuscleMapValues } from "@musclemap/core";
+
+export type DemoMode = "OVERALL" | "STRENGTH" | "CARDIO" | "MOBILITY";
 
 export const MUSCLE_LABELS_DE: Record<MuscleGroup, string> = {
   CHEST: "Brust",
@@ -117,7 +119,7 @@ const MOBILITY: MuscleMapValues = {
   SHOULDERS_REAR: v(44, 0, 0, "STABLE"),
 };
 
-export const DEMO_BY_MODE: Record<MuscleMapMode, MuscleMapValues> = {
+export const DEMO_BY_MODE: Record<DemoMode, MuscleMapValues> = {
   OVERALL,
   STRENGTH,
   CARDIO,

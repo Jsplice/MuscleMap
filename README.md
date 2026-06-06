@@ -6,6 +6,8 @@
 Render the human body and color each muscle group by a 0–100 score — as a clean flat-vector figure **or** layered over a photorealistic body. Headless core + React.
 
 [![CI](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml/badge.svg)](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
+[![npm downloads](https://img.shields.io/npm/dm/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
 [![status: early alpha](https://img.shields.io/badge/status-early%20alpha-orange)](#what-it-is)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -25,7 +27,7 @@ It is intentionally **app-agnostic** — no database, no backend, no auth, no fr
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
-> **Status — `0.1.0`, early / pre-release.** Included: the core API, color engine, region rules, **male & female front/back bodies**, the React component, unit tests and CI. The public API may still change before `1.0`.
+> **Status — early / pre-release.** Included: the core API, color engine, region rules, **male & female front/back bodies**, bundled demo body photos, the React component, unit tests and CI. The public API may still change before `1.0`.
 
 ### Highlights
 
@@ -204,7 +206,7 @@ getColorScaleCss("LOAD", "90deg");     // "linear-gradient(90deg, …)"
 
 ### Single-color (monochrome) scale
 
-Prefer one brand color over the multi-hue ramps? Set `monochromeColor` — the body and legend then run a single grey → color scale (0–100). `colorModel` is ignored while it's set.
+Prefer one brand color over the multi-hue ramps? Set `monochromeColor` — the body and legend then run a single grey → color scale (0–100). `colorModel` is ignored while it's set. Monochrome colors accept `#RGB` and `#RRGGBB` hex values.
 
 ```tsx
 // 0 = grey → 100 = your blue
@@ -236,16 +238,20 @@ getMonochromeScaleCss("#2f7bff");      // "linear-gradient(90deg, #6b7280 0%, #2
 | `region` | `"FULL_BODY" \| "UPPER_BODY" \| "LOWER_BODY" \| "CORE"` | `"FULL_BODY"` | Active region. |
 | `cropToRegion` | `boolean` | `false` | Crop the figure to `region`. |
 | `colorModel` | `"LOAD" \| "FREQUENCY" \| "BALANCE" \| "RECOVERY_RISK"` | `"LOAD"` | Heatmap scale. |
-| `monochromeColor` | `string` | — | Single-color override: tints the body/legend with a grey→color scale (0–100). Overrides `colorModel`. |
-| `monochromeBaseColor` | `string` | `"#6b7280"` | Base color at score 0 for the monochrome scale. |
+| `monochromeColor` | `string` | — | Single-color override using `#RGB` or `#RRGGBB`; overrides `colorModel`. |
+| `monochromeBaseColor` | `string` | `"#6b7280"` | Hex base color at score 0 for the monochrome scale. |
 | `glow` | `boolean` | `true` | Glow halo behind active muscles. |
 | `showLegend` | `boolean` | `true` | Render the gradient legend. |
+| `legendMinLabel` | `string` | — | Custom label for the low end of the legend. |
+| `legendMaxLabel` | `string` | — | Custom label for the high end of the legend. |
 | `tooltipFields` | `TooltipField[]` | `["group","score"]` | What the hover/tap tooltip shows. |
 | `labels` | `Partial<Record<MuscleGroup,string>>` | — | Localized tooltip labels (defaults to the raw enum). |
 | `backgroundImageFront` / `backgroundImageBack` | `string` | — | Body photo behind the figure. |
 | `backgroundGrayscale` / `backgroundBrightness` / `backgroundOpacity` | `boolean` / `number` / `number` | `false` / `1` / `1` | Background image treatment. |
 | `figureWidth` | `number` | `200` | Per-figure SVG width (px). |
 | `onSelectMuscle` | `(selection: { group: MuscleGroup; partId?: string; value?: MuscleMapValue }) => void` | — | Fired on tap/click with the selected muscle `group`, the optional surface `partId` (e.g. `HAMSTRINGS_LEFT`), and the resolved `value` (respecting `partValues`). |
+| `className` | `string` | — | Optional CSS class applied to the root container. |
+| `style` | `CSSProperties` | — | Inline styles applied to the root container. |
 
 ---
 
@@ -279,7 +285,7 @@ pnpm test        # vitest
 
 The three packages depend on each other via the `workspace:*` protocol. Publish
 **with pnpm** (`pnpm -r publish` / `pnpm pack`) — it rewrites those to the
-concrete version (e.g. `0.1.0`) in the published tarball; plain `npm publish`
+concrete package version in the published tarball; plain `npm publish`
 does **not**. Each package sets `publishConfig.access: "public"` so the scoped
 packages publish publicly. CI packs the tarballs and fails if any still contains
 a `workspace:` dependency.

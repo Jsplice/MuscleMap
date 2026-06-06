@@ -1,4 +1,4 @@
-import type { MuscleGroup, MuscleMapRegion, MuscleMapView } from "./types";
+import type { MuscleGroup, MuscleMapRegion, MuscleMapView } from "./types.js";
 
 /**
  * Which body view(s) a muscle group is visible in.

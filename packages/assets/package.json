@@ -11,7 +11,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./bodies/*": "./bodies/*"
+    "./bodies/*.webp": {
+      "types": "./bodies/*.webp.d.ts",
+      "default": "./bodies/*.webp"
+    }
   },
   "files": [
     "dist",

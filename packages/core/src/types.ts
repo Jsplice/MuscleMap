@@ -24,7 +24,6 @@ export type MuscleGroup =
 export type MuscleMapSex = "MALE" | "FEMALE";
 export type MuscleMapView = "FRONT" | "BACK" | "BOTH";
 export type MuscleMapRegion = "FULL_BODY" | "UPPER_BODY" | "LOWER_BODY" | "CORE";
-export type MuscleMapMode = "OVERALL" | "STRENGTH" | "CARDIO" | "MOBILITY";
 export type MuscleColorModel = "LOAD" | "FREQUENCY" | "BALANCE" | "RECOVERY_RISK";
 export type MuscleTrend = "UP" | "DOWN" | "STABLE";
 

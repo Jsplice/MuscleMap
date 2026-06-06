@@ -1,4 +1,4 @@
-import type { MuscleColorModel } from "./types";
+import type { MuscleColorModel } from "./types.js";
 
 const NEUTRAL = "#334155";
 
