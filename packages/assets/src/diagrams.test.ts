@@ -33,6 +33,13 @@ describe.each(Object.entries(DIAGRAMS))("%s diagram", (_name, diagram) => {
     expect(diagram.regionBox?.LOWER_BODY).toBeTruthy();
     expect(diagram.regionBox?.CORE).toBeTruthy();
   });
+
+  it("surface ids follow the `<group>_<SIDE>` scheme", () => {
+    for (const m of diagram.muscles) {
+      if (m.id === undefined) continue;
+      expect([m.group, `${m.group}_LEFT`, `${m.group}_RIGHT`]).toContain(m.id);
+    }
+  });
 });
 
 describe("getMuscleSurfaceIds", () => {
@@ -41,6 +48,22 @@ describe("getMuscleSurfaceIds", () => {
     expect(getMuscleSurfaceIds(MALE_BACK)).toContain("TRAPEZIUS_LEFT");
     expect(getMuscleSurfaceIds(FEMALE_FRONT).length).toBeGreaterThan(0);
     expect(getMuscleSurfaceIds(FEMALE_BACK)).toContain("TRAPEZIUS_LEFT");
+  });
+
+  it("uses normalized ids — no German, typo or naming-variant labels", () => {
+    // Each of these previously had a buggy id (see CHANGELOG).
+    expect(getMuscleSurfaceIds(FEMALE_BACK)).toContain("LATS_LEFT"); // was LATISIMUS_LETF
+    expect(getMuscleSurfaceIds(FEMALE_FRONT)).toContain("BICEPS_RIGHT"); // was BIZEPS_RIGHT
+    expect(getMuscleSurfaceIds(MALE_FRONT)).toContain("SHOULDERS_SIDE_LEFT"); // was SHOULDER_SITE
+    expect(getMuscleSurfaceIds(MALE_FRONT)).toContain("QUADS_LEFT"); // was QUADRICEPS
+    expect(getMuscleSurfaceIds(MALE_BACK)).toContain("OBLIQUES_LEFT"); // was SIDE_CORE
+
+    const bad = /ADDUKTOR|ABDUKTOR|BIZEPS|QUADRICEPS|SITE|SIDE_CORE|CORE_SIDE|LATISIMUS|LETF|KNEE/;
+    for (const d of [MALE_FRONT, MALE_BACK, FEMALE_FRONT, FEMALE_BACK]) {
+      const ids = getMuscleSurfaceIds(d);
+      expect(new Set(ids).size).toBe(ids.length); // de-duplicated
+      expect(ids.filter((id) => bad.test(id))).toEqual([]);
+    }
   });
 });
 

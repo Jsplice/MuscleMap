@@ -22,13 +22,14 @@ export function getBodyDiagram(sex: MuscleMapSex, view: BodyView): BodyDiagram {
 }
 
 /**
- * The addressable surface ids of a diagram (a muscle path's `id`, e.g.
- * "TRAPEZIUS_LEFT"). Use these as keys for `partValues`. Surfaces are
- * data-driven (they come from the traced labels), so this is a runtime list
- * rather than a fixed type.
+ * The addressable surface ids of a diagram (a muscle path's `id`). Ids follow a
+ * consistent `<MuscleGroup>_<SIDE>` scheme, e.g. "TRAPEZIUS_LEFT", "QUADS_RIGHT".
+ * Use these as keys for `partValues`. A few surfaces share one id (e.g. the knee
+ * and quad are both `QUADS_LEFT`), so the list is de-duplicated.
  */
 export function getMuscleSurfaceIds(diagram: BodyDiagram): string[] {
-  return diagram.muscles
+  const ids = diagram.muscles
     .map((m) => m.id)
     .filter((id): id is string => typeof id === "string");
+  return [...new Set(ids)];
 }

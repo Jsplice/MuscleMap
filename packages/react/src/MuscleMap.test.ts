@@ -53,4 +53,12 @@ describe("MuscleMap (SSR smoke)", () => {
     expect(html).toContain("FEMALE BACK muscle map");
     expect(html).toContain("<path");
   });
+
+  it("colors a normalized surface id (the previously-broken LATS_LEFT)", () => {
+    const color = getMuscleHeatColor(95, "LOAD");
+    // female back left lat was `LATISIMUS_LETF` (typo) → now `LATS_LEFT`.
+    const html = render({ sex: "FEMALE", view: "BACK", values: {}, partValues: { LATS_LEFT: { score: 95 } } });
+    expect(html).toContain('aria-label="LATS_LEFT"');
+    expect(html).toContain(color);
+  });
 });

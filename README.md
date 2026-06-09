@@ -110,6 +110,8 @@ Your app owns aggregation; MuscleMap just renders. `volumeKg` / `sets` / `trend`
 
 Color a whole group via `values`, or override an individual surface via `partValues` (keyed by the path's `id`, e.g. `HAMSTRINGS_LEFT`). Perfect for left/right balance.
 
+Surface ids follow a consistent **`<MuscleGroup>_LEFT` / `<MuscleGroup>_RIGHT`** scheme (e.g. `QUADS_LEFT`, `SHOULDERS_SIDE_RIGHT`, `LATS_LEFT`) across every body. List the ones a diagram actually has with `getMuscleSurfaceIds(diagram)` from `@musclemap/assets`.
+
 ```tsx
 <MuscleMap
   values={{ HAMSTRINGS: { score: 70 } }}        // both sides, bundled
