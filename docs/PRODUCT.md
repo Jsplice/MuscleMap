@@ -28,11 +28,14 @@ MuscleMap helps users and trainers answer:
 
 ## Muscle groups
 
-Initial muscle groups:
+The `MuscleGroup` enum (in `@musclemap/core`):
 
 - CHEST
-- BACK_UPPER
+- BACK_UPPER *(legacy — superseded by TRAPEZIUS / RHOMBOIDS / LATS; no path)*
 - BACK_LOWER
+- TRAPEZIUS
+- RHOMBOIDS
+- LATS
 - SHOULDERS_FRONT
 - SHOULDERS_SIDE
 - SHOULDERS_REAR
@@ -40,13 +43,18 @@ Initial muscle groups:
 - TRICEPS
 - FOREARMS
 - CORE
+- OBLIQUES
 - GLUTES
 - QUADS
 - HAMSTRINGS
 - CALVES
-- HIP_FLEXORS
+- HIP_FLEXORS *(no traced path yet)*
 - ADDUCTORS
 - ABDUCTORS
+
+Per-surface ids follow an anatomical `<MUSCLE>_<SIDE>` scheme (e.g.
+`LATISSIMUS_LEFT`); see `MUSCLE_GROUP_PARTS` / `MUSCLE_PART_IDS` in
+`@musclemap/assets`.
 
 ## Color models
 

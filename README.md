@@ -23,7 +23,7 @@ Render the human body and color each muscle group by a 0–100 score — as a cl
 
 MuscleMap is a **standalone visualization library** for showing human bodies and muscle groups as an interactive heatmap. You feed it normalized scores per muscle (0–100); it paints the body.
 
-It is intentionally **app-agnostic** — no database, no backend, no auth, no framework lock-in in the core. It was built for fitness analytics products (e.g. TrainPilot / RepMap) but ships free of any of them.
+It is intentionally **app-agnostic** — no database, no backend, no auth, and no framework lock-in in the core packages. It was built for fitness analytics products (e.g. TrainPilot / RepMap) but ships free of any of them.
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
@@ -32,7 +32,7 @@ It is intentionally **app-agnostic** — no database, no backend, no auth, no fr
 ### Highlights
 
 - 🧠 **Headless core** — color scales, region/visibility rules and scoring helpers with zero UI, usable from any framework.
-- 🖼️ **Two looks, one component** — flat vector silhouette, or a greyscale photoreal body with the colored muscles laid on top, pixel-aligned.
+- 🖼️ **Two looks, one component** — flat vector silhouette, or a grayscale photoreal body with the colored muscles laid on top, pixel-aligned.
 - 🎯 **Each muscle surface individually addressable** — color a whole group (bundled) *or* a single surface like `TRAPEZIUS_LEFT` (e.g. left/right balance).
 - 🔍 **Region views** — full body, upper body, lower body — actually cropped, not just zoomed.
 - 🎨 **Multiple color models** — Load, Frequency, Balance, Recovery Risk — body fills and legend always in sync.

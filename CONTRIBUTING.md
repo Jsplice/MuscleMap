@@ -1,6 +1,6 @@
 # Contributing to MuscleMap
 
-Thanks for your interest! MuscleMap is an early-stage (`0.1.0`) library — issues and PRs are welcome.
+Thanks for your interest! MuscleMap is an early-stage library — issues and PRs are welcome.
 
 ## Setup
 

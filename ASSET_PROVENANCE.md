@@ -21,7 +21,7 @@ semantic IDs (`CHEST_LEFT`, `TRAPEZIUS_LEFT`, `BODY`, …).
 
 ## 2. Reference body photographs — OpenAI-generated, MIT
 
-The greyscale "photoreal hybrid" look is backed by four reference photos. They
+The grayscale "photoreal hybrid" look is backed by four reference photos. They
 are **bundled in the published `@musclemap/assets` package** and importable as
 asset URLs:
 

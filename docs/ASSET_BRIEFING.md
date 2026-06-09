@@ -1,5 +1,14 @@
 # MuscleMap SVG Asset Briefing
 
+> **Historical — superseded.** This was the original brief for commissioning the
+> body assets. The shipped assets took a different route: they were **traced in
+> Inkscape over reference images** and exported as path data, with **anatomical
+> `<MUSCLE>_<SIDE>` surface ids** (e.g. `LATISSIMUS_LEFT`) — not the group-based
+> id list below. For the current workflow see the README **Assets** section and
+> [`ASSET_PROVENANCE.md`](../ASSET_PROVENANCE.md); for the real id list use
+> `MUSCLE_PART_IDS` / `MUSCLE_GROUP_PARTS` from `@musclemap/assets`. Kept for
+> historical context only.
+
 ## Goal
 
 Create four premium segmented SVG anatomy assets for a fitness analytics app.

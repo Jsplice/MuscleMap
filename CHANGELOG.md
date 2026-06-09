@@ -18,7 +18,7 @@ First public (early-alpha) release.
 - Per-surface addressing: `partValues` (keyed by path id, e.g. `TRAPEZIUS_LEFT`)
   and `getMuscleSurfaceIds(diagram)`.
 - Cropped region views (`cropToRegion`) — full / upper / lower body.
-- Photoreal hybrid: greyscale body photo background clipped to the silhouette
+- Photoreal hybrid: grayscale body photo background clipped to the silhouette
   (`backgroundImage*`, `backgroundGrayscale`, `backgroundBrightness`).
 - Fine-grained back muscles: `TRAPEZIUS`, `RHOMBOIDS`, `LATS`, `OBLIQUES`.
 - Keyboard accessibility for muscle selection (focusable paths, Enter/Space).
