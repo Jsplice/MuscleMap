@@ -28,8 +28,10 @@ compiled SVG/JS:
 anatomical ids — import `MUSCLE_GROUP_PARTS` / `MusclePartId` and let the compiler
 check them.
 
+**Coverage:** added the missing **adductor** surfaces to `MALE_BACK`
+(`ADDUCTOR_LEFT` / `ADDUCTOR_RIGHT`), so male/female and front/back are now at
+parity for every group that has any path.
+
 **Notes:**
 - `BACK_UPPER` and `HIP_FLEXORS` remain in the `MuscleGroup` enum but have no
   traced path yet (`MUSCLE_GROUP_PARTS` lists them as `[]`).
-- Coverage gap (not fixed here): `MALE_BACK` has no adductor paths; `FEMALE_BACK`
-  does. Adding them needs the male-back SVG re-traced.
