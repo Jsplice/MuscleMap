@@ -1,5 +1,15 @@
 # @musclemap/react
 
+## 1.0.0
+
+First stable release.
+
+### Breaking Changes
+
+- `partValues` keys now use the anatomical `<MUSCLE>_<SIDE>` surface ids from
+  `@musclemap/assets` (e.g. `LATISSIMUS_LEFT`). Import `MUSCLE_GROUP_PARTS` /
+  `MusclePartId` to discover and type-check them.
+
 ## 0.4.0
 
 ### Minor Changes

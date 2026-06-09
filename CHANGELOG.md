@@ -9,6 +9,21 @@ managed with [Changesets](https://github.com/changesets/changesets).
 
 _Nothing yet._
 
+## [1.0.0] - 2026-06-09
+
+First **stable** release. The public API now follows semver — breaking changes
+only on a major bump.
+
+Highlights since `0.1.0`: female front/back bodies, cropped region views, the
+photoreal-hybrid background (now bundled as WebP in `@musclemap/assets`), a
+single-color (monochrome) scale, SonarJS linting + CI, and per-package READMEs.
+
+`1.0.0` itself unifies every per-surface `id` to one anatomical `<MUSCLE>_<SIDE>`
+scheme (e.g. `LATISSIMUS_LEFT`) and ships a typed source for them
+(`MUSCLE_PART_IDS`, `MusclePartId`, `MUSCLE_GROUP_PARTS`), plus full male/female
+and front/back surface parity. **Breaking:** `partValues` keys changed — see the
+per-package changelogs.
+
 ## [0.1.0] - 2026-06-05
 
 First public (early-alpha) release.

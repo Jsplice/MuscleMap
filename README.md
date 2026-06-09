@@ -8,7 +8,7 @@ Render the human body and color each muscle group by a 0–100 score — as a cl
 [![CI](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml/badge.svg)](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
 [![npm downloads](https://img.shields.io/npm/dm/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
-[![status: early alpha](https://img.shields.io/badge/status-early%20alpha-orange)](#what-it-is)
+[![status: stable](https://img.shields.io/badge/status-stable-brightgreen)](#what-it-is)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 <img src="docs/media/hero-front.png" alt="Male front muscle heatmap" width="250" />
@@ -27,7 +27,7 @@ It is intentionally **app-agnostic** — no database, no backend, no auth, and n
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
-> **Status — early / pre-release.** Included: the core API, color engine, region rules, **male & female front/back bodies**, bundled demo body photos, the React component, unit tests and CI. The public API may still change before `1.0`.
+> **Status — `1.0.0`, stable.** Included: the core API, color engine, region rules, **male & female front/back bodies**, bundled demo body photos, the React component, unit tests and CI. The public API follows semver — breaking changes only on a major bump.
 
 ### Highlights
 

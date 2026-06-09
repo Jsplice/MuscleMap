@@ -109,9 +109,9 @@ Set `region` and `cropToRegion` for a real cropped view (not just a zoom):
 `DEFAULT_LEGEND_LABELS`, `DEFAULT_TOOLTIP_FIELDS`, and the
 `MuscleMapProps` / `BodyFigureProps` / `PartValues` / `TooltipField` types.
 
-`MuscleMapLegend` is the standalone legend used by `MuscleMap`. `BodyFigure` is
-an experimental low-level renderer for advanced custom compositions and may
-change before `1.0`.
+`MuscleMapLegend` is the standalone legend used by `MuscleMap`. `BodyFigure` is a
+low-level renderer for advanced custom compositions; most consumers should use
+`MuscleMap`.
 
 Full prop table and docs: **https://github.com/Jsplice/MuscleMap**
 
