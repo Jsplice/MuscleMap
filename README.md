@@ -8,7 +8,7 @@ Render the human body and color each muscle group by a 0–100 score — as a cl
 [![CI](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml/badge.svg)](https://github.com/Jsplice/MuscleMap/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
 [![npm downloads](https://img.shields.io/npm/dm/@musclemap/react.svg)](https://www.npmjs.com/package/@musclemap/react)
-[![status: early alpha](https://img.shields.io/badge/status-early%20alpha-orange)](#what-it-is)
+[![status: stable](https://img.shields.io/badge/status-stable-brightgreen)](#what-it-is)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 <img src="docs/media/hero-front.png" alt="Male front muscle heatmap" width="250" />
@@ -23,16 +23,16 @@ Render the human body and color each muscle group by a 0–100 score — as a cl
 
 MuscleMap is a **standalone visualization library** for showing human bodies and muscle groups as an interactive heatmap. You feed it normalized scores per muscle (0–100); it paints the body.
 
-It is intentionally **app-agnostic** — no database, no backend, no auth, no framework lock-in in the core. It was built for fitness analytics products (e.g. TrainPilot / RepMap) but ships free of any of them.
+It is intentionally **app-agnostic** — no database, no backend, no auth, and no framework lock-in in the core packages. It was built for fitness analytics products (e.g. TrainPilot / RepMap) but ships free of any of them.
 
 > **Not** an analytics or tracking tool — purely the rendering layer. Your app calculates the scores; MuscleMap draws them.
 
-> **Status — early / pre-release.** Included: the core API, color engine, region rules, **male & female front/back bodies**, bundled demo body photos, the React component, unit tests and CI. The public API may still change before `1.0`.
+> **Status — `1.0.0`, stable.** Included: the core API, color engine, region rules, **male & female front/back bodies**, bundled demo body photos, the React component, unit tests and CI. The public API follows semver — breaking changes only on a major bump.
 
 ### Highlights
 
 - 🧠 **Headless core** — color scales, region/visibility rules and scoring helpers with zero UI, usable from any framework.
-- 🖼️ **Two looks, one component** — flat vector silhouette, or a greyscale photoreal body with the colored muscles laid on top, pixel-aligned.
+- 🖼️ **Two looks, one component** — flat vector silhouette, or a grayscale photoreal body with the colored muscles laid on top, pixel-aligned.
 - 🎯 **Each muscle surface individually addressable** — color a whole group (bundled) *or* a single surface like `TRAPEZIUS_LEFT` (e.g. left/right balance).
 - 🔍 **Region views** — full body, upper body, lower body — actually cropped, not just zoomed.
 - 🎨 **Multiple color models** — Load, Frequency, Balance, Recovery Risk — body fills and legend always in sync.
@@ -109,6 +109,24 @@ Your app owns aggregation; MuscleMap just renders. `volumeKg` / `sets` / `trend`
 ### Per-surface (left/right) addressing
 
 Color a whole group via `values`, or override an individual surface via `partValues` (keyed by the path's `id`, e.g. `HAMSTRINGS_LEFT`). Perfect for left/right balance.
+
+Surface ids use a consistent anatomical **`<MUSCLE>_LEFT` / `_RIGHT`** scheme (e.g. `LATISSIMUS_LEFT`, `SHOULDER_SIDE_RIGHT`, `QUADRICEPS_LEFT`) across every body. **Don't hardcode magic strings** — pull them from the typed source in `@musclemap/assets`:
+
+```ts
+import {
+  MUSCLE_PART_IDS,    // readonly ["ABDUCTOR_LEFT", … ] — every surface id
+  MUSCLE_GROUP_PARTS, // Record<MuscleGroup, MusclePartId[]> — group → its surfaces
+} from "@musclemap/assets";
+import type { MusclePartId } from "@musclemap/assets";
+
+MUSCLE_GROUP_PARTS.LATS;     // ["LATISSIMUS_LEFT", "LATISSIMUS_RIGHT"]
+MUSCLE_GROUP_PARTS.HIP_FLEXORS; // [] — enum group with no traced path yet
+
+// build-time-checked partValues keys:
+const left: MusclePartId = "LATISSIMUS_LEFT";
+```
+
+`getMuscleSurfaceIds(diagram)` returns the (typed, de-duplicated) ids a specific diagram actually has.
 
 ```tsx
 <MuscleMap

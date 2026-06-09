@@ -1,5 +1,24 @@
 # @musclemap/assets
 
+## 1.0.0
+
+First stable release.
+
+### Breaking Changes
+
+- Per-surface ids unified to one anatomical `<MUSCLE>_<SIDE>` scheme — e.g.
+  `LATISSIMUS_LEFT`, `QUADRICEPS_RIGHT`, `OBLIQUE_LEFT`, `ADDUCTOR_LEFT` — fixing
+  the inconsistent traced labels. `partValues` keys change accordingly.
+- New typed source for those keys: `MUSCLE_PART_IDS` (readonly tuple),
+  `MusclePartId` (union), and `MUSCLE_GROUP_PARTS`
+  (`Record<MuscleGroup, MusclePartId[]>`). `getMuscleSurfaceIds()` now returns
+  `MusclePartId[]` (de-duplicated).
+
+### Added
+
+- `MALE_BACK` adductors and extended hamstrings — full male/female and
+  front/back surface parity.
+
 ## 0.4.0
 
 ### Minor Changes

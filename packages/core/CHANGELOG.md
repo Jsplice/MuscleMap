@@ -1,5 +1,12 @@
 # @musclemap/core
 
+## 1.0.0
+
+First stable release — the public API is now considered stable under semver.
+
+No `@musclemap/core` API changes in this release; the version is aligned with the
+`@musclemap/*` fixed package group.
+
 ## 0.4.0
 
 ### Minor Changes
