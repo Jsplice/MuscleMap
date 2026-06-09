@@ -4,18 +4,32 @@
 "@musclemap/react": minor
 ---
 
-Normalize all per-surface `id`s to a consistent `<MuscleGroup>_<SIDE>` scheme so
-`partValues` keys are predictable across every body. Fixes several buggy ids in
-the traced assets:
+**Unified, typed per-surface ids.** All surface `id`s now use one consistent,
+anatomically-correct English scheme `<MUSCLE>_<SIDE>`, fixing the inconsistent
+traced labels that broke `partValues` targeting:
 
-- `LATISIMUS_LETF` (female back) → `LATS_LEFT` — typo broke per-surface coloring.
-- `BIZEPS_RIGHT` (female front) → `BICEPS_RIGHT` — German label.
-- `SHOULDER_SITE_*` (male front) → `SHOULDERS_SIDE_*`.
-- `QUADRICEPS_*` / `KNEE_*` → `QUADS_*`; `ADDUKTOR`/`ABDUKTOR` → `ADDUCTORS`/`ABDUCTORS`.
-- `CORE_SIDE_*` / `SIDE_CORE_*` (obliques) → `OBLIQUES_*`.
+- `LATISIMUS_LETF` → `LATISSIMUS_LEFT` (typo); `LATISIMUS` → `LATISSIMUS`
+- `BIZEPS_RIGHT` → `BICEPS_RIGHT`
+- `SHOULDER_SITE_*` → `SHOULDER_SIDE_*`
+- `QUADRICEPS_*` / `QUADS_*` → `QUADRICEPS_*`
+- `ADDUKTOR`/`ABDUKTOR` → `ADDUCTOR`/`ABDUCTOR`
+- `CORE_SIDE_*` / `SIDE_CORE_*` → `OBLIQUE_*`
 
-`getMuscleSurfaceIds(diagram)` now de-duplicates (a few surfaces share an id,
-e.g. knee + quad → `QUADS_LEFT`).
+**New typed source (`@musclemap/assets`)** so consumers stop scraping ids from the
+compiled SVG/JS:
 
-**Migration:** if you keyed `partValues` by an old raw id, switch to
-`<MuscleGroup>_LEFT` / `_RIGHT` (use `getMuscleSurfaceIds` to discover them).
+- `MUSCLE_PART_IDS` — readonly tuple of every surface id.
+- `MusclePartId` — union type of those ids.
+- `MUSCLE_GROUP_PARTS` — `Record<MuscleGroup, MusclePartId[]>` (group → its
+  surfaces). Path-less enum groups map to `[]`.
+- `getMuscleSurfaceIds(diagram)` now returns `MusclePartId[]` (de-duplicated).
+
+**Migration:** if you keyed `partValues` by an old raw id, switch to the new
+anatomical ids — import `MUSCLE_GROUP_PARTS` / `MusclePartId` and let the compiler
+check them.
+
+**Notes:**
+- `BACK_UPPER` and `HIP_FLEXORS` remain in the `MuscleGroup` enum but have no
+  traced path yet (`MUSCLE_GROUP_PARTS` lists them as `[]`).
+- Coverage gap (not fixed here): `MALE_BACK` has no adductor paths; `FEMALE_BACK`
+  does. Adding them needs the male-back SVG re-traced.

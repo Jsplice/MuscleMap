@@ -110,7 +110,23 @@ Your app owns aggregation; MuscleMap just renders. `volumeKg` / `sets` / `trend`
 
 Color a whole group via `values`, or override an individual surface via `partValues` (keyed by the path's `id`, e.g. `HAMSTRINGS_LEFT`). Perfect for left/right balance.
 
-Surface ids follow a consistent **`<MuscleGroup>_LEFT` / `<MuscleGroup>_RIGHT`** scheme (e.g. `QUADS_LEFT`, `SHOULDERS_SIDE_RIGHT`, `LATS_LEFT`) across every body. List the ones a diagram actually has with `getMuscleSurfaceIds(diagram)` from `@musclemap/assets`.
+Surface ids use a consistent anatomical **`<MUSCLE>_LEFT` / `_RIGHT`** scheme (e.g. `LATISSIMUS_LEFT`, `SHOULDER_SIDE_RIGHT`, `QUADRICEPS_LEFT`) across every body. **Don't hardcode magic strings** — pull them from the typed source in `@musclemap/assets`:
+
+```ts
+import {
+  MUSCLE_PART_IDS,    // readonly ["ABDUCTOR_LEFT", … ] — every surface id
+  MUSCLE_GROUP_PARTS, // Record<MuscleGroup, MusclePartId[]> — group → its surfaces
+} from "@musclemap/assets";
+import type { MusclePartId } from "@musclemap/assets";
+
+MUSCLE_GROUP_PARTS.LATS;     // ["LATISSIMUS_LEFT", "LATISSIMUS_RIGHT"]
+MUSCLE_GROUP_PARTS.HIP_FLEXORS; // [] — enum group with no traced path yet
+
+// build-time-checked partValues keys:
+const left: MusclePartId = "LATISSIMUS_LEFT";
+```
+
+`getMuscleSurfaceIds(diagram)` returns the (typed, de-duplicated) ids a specific diagram actually has.
 
 ```tsx
 <MuscleMap

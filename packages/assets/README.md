@@ -27,12 +27,31 @@ diagram.muscles;     // [{ group, side, id?, d }, …] — SVG path data
 diagram.outline;     // body silhouette path(s)
 diagram.regionBox;   // { UPPER_BODY, LOWER_BODY, CORE } cropped viewBoxes
 
-// Every individually addressable surface id (e.g. "TRAPEZIUS_LEFT").
+// Every individually addressable surface id (e.g. "LATISSIMUS_LEFT").
 getMuscleSurfaceIds(diagram);
 ```
 
 Direct diagram exports are also available: `MALE_FRONT`, `MALE_BACK`,
 `FEMALE_FRONT`, `FEMALE_BACK`.
+
+### Typed surface ids (for `partValues`)
+
+Surface ids follow an anatomical `<MUSCLE>_<SIDE>` scheme. Pull the keys from the
+typed source instead of hardcoding strings:
+
+```ts
+import { MUSCLE_PART_IDS, MUSCLE_GROUP_PARTS } from "@musclemap/assets";
+import type { MusclePartId } from "@musclemap/assets";
+
+MUSCLE_PART_IDS;            // readonly ["ABDUCTOR_LEFT", "LATISSIMUS_LEFT", …]
+MUSCLE_GROUP_PARTS.LATS;    // ["LATISSIMUS_LEFT", "LATISSIMUS_RIGHT"]
+MUSCLE_GROUP_PARTS.HIP_FLEXORS; // [] — enum group with no traced path yet
+
+const key: MusclePartId = "QUADRICEPS_LEFT"; // build-time checked
+```
+
+This lets a consumer (e.g. a RepMap adapter) validate `partValues` keys against a
+package constant at build time rather than guessing from the SVG.
 
 ## Body photos (photoreal hybrid)
 
