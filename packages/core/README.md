@@ -11,6 +11,8 @@ is built on top of this.
 ## Install
 
 ```bash
+npm install @musclemap/core
+# or
 pnpm add @musclemap/core
 ```
 

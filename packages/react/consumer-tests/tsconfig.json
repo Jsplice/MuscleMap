@@ -5,5 +5,5 @@
     "declarationMap": false,
     "noEmit": true
   },
-  "include": ["asset-imports.ts"]
+  "include": ["asset-imports.ts", "part-values.ts"]
 }
