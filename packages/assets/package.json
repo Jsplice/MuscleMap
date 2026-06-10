@@ -1,6 +1,6 @@
 {
   "name": "@musclemap/assets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Body diagrams for MuscleMap — segmented muscle SVG path data with semantic IDs and region viewBoxes. Framework-free.",
   "license": "MIT",
   "type": "module",

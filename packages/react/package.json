@@ -1,6 +1,6 @@
 {
   "name": "@musclemap/react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component for MuscleMap — premium, data-driven muscle heatmaps (flat vector or photoreal hybrid).",
   "license": "MIT",
   "type": "module",
