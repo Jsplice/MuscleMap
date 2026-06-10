@@ -11,6 +11,8 @@ but usable on its own to render bodies in any stack.
 ## Install
 
 ```bash
+npm install @musclemap/assets @musclemap/core
+# or
 pnpm add @musclemap/assets @musclemap/core
 ```
 

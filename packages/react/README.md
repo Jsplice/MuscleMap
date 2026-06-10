@@ -19,6 +19,8 @@ full documentation, asset workflow and screenshots.
 ## Install
 
 ```bash
+npm install @musclemap/react @musclemap/core @musclemap/assets react react-dom
+# or
 pnpm add @musclemap/react @musclemap/core @musclemap/assets react react-dom
 ```
 

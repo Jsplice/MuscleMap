@@ -24,7 +24,7 @@
     "lint:fix": "eslint . --fix",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm lint && pnpm build && pnpm verify:packages && pnpm typecheck && pnpm test && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

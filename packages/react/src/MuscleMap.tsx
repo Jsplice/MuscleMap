@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import type {
   MuscleColorModel,
@@ -112,7 +112,16 @@ export function MuscleMap({
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const active = pinned ?? hovered;
-  const figures = viewsFor(view);
+  // Memoised: `viewsFor` returns a fresh array, which would otherwise defeat
+  // the `visibleByView` memo below on every render.
+  const figures = useMemo(() => viewsFor(view), [view]);
+
+  // A pinned/hovered muscle may not exist on the new body or view — drop the
+  // selection instead of showing a stale tooltip.
+  useEffect(() => {
+    setPinned(null);
+    setHovered(null);
+  }, [sex, view, region]);
 
   const resolveValue = (group: MuscleGroup, partId?: string): MuscleMapValue | undefined =>
     (partId ? partValues?.[partId] : undefined) ?? values[group];

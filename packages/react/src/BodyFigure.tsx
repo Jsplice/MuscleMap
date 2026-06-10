@@ -2,17 +2,25 @@ import { memo } from "react";
 import type { CSSProperties } from "react";
 import type { MuscleColorModel, MuscleGroup, MuscleMapValue, MuscleMapValues } from "@musclemap/core";
 import { getMonochromeColor, getMuscleHeatColor } from "@musclemap/core";
-import type { BodyDiagram, MusclePath } from "@musclemap/assets";
+import type { BodyDiagram, MusclePartId, MusclePath } from "@musclemap/assets";
 
 const NEUTRAL_BASE = "#33405a";
 const NEUTRAL_EDGE = "#212c40";
 const MUSCLE_DIM = "#3a465e";
 const STROKE = "rgba(6, 10, 18, 0.6)";
 
-/** Per-surface values, keyed by a muscle path's `id` (e.g. "TRAPEZIUS_LEFT"). */
-export type PartValues = Partial<Record<string, MuscleMapValue>>;
+/**
+ * Per-surface values, keyed by a muscle path's `id` (e.g. "LATISSIMUS_LEFT").
+ * Keys autocomplete to the bundled {@link MusclePartId}s, but any string is
+ * accepted so custom (bring-your-own) bodies with their own surface ids work.
+ */
+export type PartValues = Partial<Record<MusclePartId | (string & {}), MuscleMapValue>>;
 
-/** @experimental Low-level rendering API that may change before 1.0. */
+/**
+ * Low-level single-figure renderer used by `MuscleMap`, public for advanced
+ * custom compositions. Stable under semver like the rest of the API; most
+ * consumers should use `MuscleMap` instead.
+ */
 export type BodyFigureProps = {
   diagram: BodyDiagram;
   values: MuscleMapValues;

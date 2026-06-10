@@ -122,9 +122,11 @@ import type { MusclePartId } from "@musclemap/assets";
 MUSCLE_GROUP_PARTS.LATS;     // ["LATISSIMUS_LEFT", "LATISSIMUS_RIGHT"]
 MUSCLE_GROUP_PARTS.HIP_FLEXORS; // [] — enum group with no traced path yet
 
-// build-time-checked partValues keys:
+// build-time-checked key (typo = compile error):
 const left: MusclePartId = "LATISSIMUS_LEFT";
 ```
+
+`partValues` keys **autocomplete** to the bundled `MusclePartId`s but intentionally stay string-keyed, so custom (bring-your-own) bodies with their own surface ids keep working. For strict checking, type your keys as `MusclePartId` (as above) or validate against `MUSCLE_PART_IDS` at build time.
 
 `getMuscleSurfaceIds(diagram)` returns the (typed, de-duplicated) ids a specific diagram actually has.
 
@@ -199,6 +201,8 @@ Set `region` and turn on `cropToRegion` to get a **real cropped view**, not just
 | `LOWER_BODY` | glutes, quads, hamstrings, calves, adductors, abductors, hip flexors | hips → feet |
 
 There's also a `CORE` region (abs, obliques, lower back) for isolating the midsection — abs belong to both `UPPER_BODY` and `CORE`. The playground demos the three main views; the API supports all four regions.
+
+> **Note:** a few `MuscleGroup` enum values are typed for scoring compatibility but have **no traced surface** in the bundled bodies yet — currently `HIP_FLEXORS` and the legacy `BACK_UPPER` (superseded by `TRAPEZIUS`/`RHOMBOIDS`/`LATS`). Setting a score for them renders nothing; check `MUSCLE_GROUP_PARTS` (it lists them as `[]`) to see which groups have addressable surfaces.
 
 > Region viewBoxes are precomputed per body and stored on the `BodyDiagram`, so cropping is exact for whatever geometry you ship.
 
