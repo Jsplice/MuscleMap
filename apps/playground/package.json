@@ -13,7 +13,7 @@
     "@musclemap/core": "workspace:*",
     "@musclemap/react": "workspace:*",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",
