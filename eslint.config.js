@@ -30,5 +30,11 @@ export default tseslint.config(
       sourceType: "module",
       globals: { ...globals.browser, ...globals.node },
     },
+    rules: {
+      // False positive with `exactOptionalPropertyTypes: true` (which this repo
+      // uses): there `foo?: T` and `foo?: T | undefined` are different types —
+      // only the latter allows explicitly assigning `undefined`.
+      "sonarjs/no-redundant-optional": "off",
+    },
   },
 );
