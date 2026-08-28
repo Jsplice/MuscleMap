@@ -36,7 +36,7 @@ jobs:
       # Publishing requires the NPM_TOKEN secret; without it, only the version PR
       # is managed and nothing is published.
       - name: Create Release PR or publish
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           version: pnpm version-packages
           publish: pnpm release
