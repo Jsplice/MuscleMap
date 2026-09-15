@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to [Semantic Versioning](https://semver.org/). Releases are
 managed with [Changesets](https://github.com/changesets/changesets).
 
-## [Unreleased]
+## [1.1.0] - 2026-09-15
 
 ### Fixed
 - Several `<MuscleMap />` instances on one page (even with the same body) no
@@ -25,6 +25,9 @@ managed with [Changesets](https://github.com/changesets/changesets).
 - Muscle surfaces now expose a localized accessible name (`labels` + side, e.g.
   "Brust (left)") instead of the raw id; the id moved to `data-part-id`.
 - Package `exports` gained a `default` condition for require-based tooling.
+- Tooling: release workflow on `changesets/action@v2`, dev dependencies bumped
+  (vitest 5, eslint 10.10, typescript-eslint 8.70). TypeScript stays on 6.x until
+  typescript-eslint supports 7.x.
 
 ## [1.0.1] - 2026-06-10
 
