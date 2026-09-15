@@ -1,5 +1,30 @@
 # @musclemap/assets
 
+## 1.1.0
+
+### Minor Changes
+
+- 96863f2: The male centre `TRAPEZIUS` surface (front and back) is split at the midline into
+  `TRAPEZIUS_LEFT` / `TRAPEZIUS_RIGHT`, matching the female bodies and enabling
+  left/right balance for the traps on every body. Geometry is otherwise unchanged.
+  `MUSCLE_PART_IDS` / `MusclePartId` drop `"TRAPEZIUS"` — consumers keying
+  `partValues` by that id must switch to the `_LEFT` / `_RIGHT` ids.
+
+### Patch Changes
+
+- 26c8610: Review fixes:
+  
+  - Unique SVG def ids per `<MuscleMap />` instance (`useId`) — multiple maps on
+    one page no longer share gradients / filters / clipPaths and show wrong colors.
+  - `TRICEPS` is visible from both sides; the traced front triceps are now colored
+    and interactive in the `FRONT` view.
+  - Muscle surfaces get a localized accessible name from `labels` (plus side,
+    e.g. "Brust (left)") instead of the raw surface id; the id is exposed as
+    `data-part-id`.
+  - Package `exports` gained a `default` condition.
+- Updated dependencies [26c8610]
+  - @musclemap/core@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes
