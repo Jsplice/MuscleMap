@@ -18,6 +18,7 @@ npm-debug.log*
 pnpm-debug.log*
 
 # Editor / OS
+.claude/
 .DS_Store
 Thumbs.db
 .idea/

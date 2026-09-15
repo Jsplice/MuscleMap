@@ -37,7 +37,7 @@ export const MUSCLE_GROUP_META: Record<MuscleGroup, MuscleGroupMeta> = {
   SHOULDERS_SIDE: { group: "SHOULDERS_SIDE", regions: ["UPPER_BODY"], visibility: "BOTH", bilateral: true },
   SHOULDERS_REAR: { group: "SHOULDERS_REAR", regions: ["UPPER_BODY"], visibility: "BACK", bilateral: true },
   BICEPS: { group: "BICEPS", regions: ["UPPER_BODY"], visibility: "FRONT", bilateral: true },
-  TRICEPS: { group: "TRICEPS", regions: ["UPPER_BODY"], visibility: "BACK", bilateral: true },
+  TRICEPS: { group: "TRICEPS", regions: ["UPPER_BODY"], visibility: "BOTH", bilateral: true },
   FOREARMS: { group: "FOREARMS", regions: ["UPPER_BODY"], visibility: "BOTH", bilateral: true },
   CORE: { group: "CORE", regions: ["UPPER_BODY", "CORE"], visibility: "FRONT", bilateral: false },
   OBLIQUES: { group: "OBLIQUES", regions: ["UPPER_BODY", "CORE"], visibility: "BOTH", bilateral: true },

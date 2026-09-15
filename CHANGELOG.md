@@ -7,7 +7,30 @@ managed with [Changesets](https://github.com/changesets/changesets).
 
 ## [Unreleased]
 
-_Nothing yet._
+### Fixed
+- Several `<MuscleMap />` instances on one page (even with the same body) no
+  longer share SVG gradient / filter / clipPath ids — the second instance used
+  to pick up the first one's colors. Ids are now derived from React's `useId`.
+- Triceps are traced on the front bodies but were flagged back-only, so they
+  rendered inactive in the `FRONT` view. `TRICEPS` is now visible from both sides.
+- Playground demo data no longer ranks the surface-less `BACK_UPPER` group first.
+
+### Changed
+- **Male trapezius split left/right.** The single centre `TRAPEZIUS` surface on
+  the male front and back bodies is split at the midline into `TRAPEZIUS_LEFT` /
+  `TRAPEZIUS_RIGHT` (parity with the female bodies, enables left/right balance
+  for the traps everywhere). Geometry is otherwise unchanged and still follows
+  the reference photo's lines. `MUSCLE_PART_IDS` / `MusclePartId` no longer
+  contain `"TRAPEZIUS"`.
+- Muscle surfaces now expose a localized accessible name (`labels` + side, e.g.
+  "Brust (left)") instead of the raw id; the id moved to `data-part-id`.
+- Package `exports` gained a `default` condition for require-based tooling.
+
+## [1.0.1] - 2026-06-10
+
+Post-1.0 review fixes: `PartValues` keys autocomplete to the bundled
+`MusclePartId`s, a stale tooltip no longer survives `sex` / `view` / `region`
+changes, fixed `visibleByView` memoization, hardened release quality gate.
 
 ## [1.0.0] - 2026-06-09
 

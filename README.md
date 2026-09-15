@@ -267,7 +267,7 @@ getMonochromeScaleCss("#2f7bff");      // "linear-gradient(90deg, #6b7280 0%, #2
 | `legendMinLabel` | `string` | — | Custom label for the low end of the legend. |
 | `legendMaxLabel` | `string` | — | Custom label for the high end of the legend. |
 | `tooltipFields` | `TooltipField[]` | `["group","score"]` | What the hover/tap tooltip shows. |
-| `labels` | `Partial<Record<MuscleGroup,string>>` | — | Localized tooltip labels (defaults to the raw enum). |
+| `labels` | `Partial<Record<MuscleGroup,string>>` | — | Localized labels for the tooltip and each surface's accessible name (tooltip defaults to the raw enum). |
 | `backgroundImageFront` / `backgroundImageBack` | `string` | — | Body photo behind the figure. |
 | `backgroundGrayscale` / `backgroundBrightness` / `backgroundOpacity` | `boolean` / `number` / `number` | `false` / `1` / `1` | Background image treatment. |
 | `figureWidth` | `number` | `200` | Per-figure SVG width (px). |

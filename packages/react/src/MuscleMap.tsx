@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import type {
   MuscleColorModel,
@@ -43,8 +43,9 @@ export type MuscleMapProps = {
   /** Which fields the tooltip shows. Default: muscle group (enum) + score. */
   tooltipFields?: TooltipField[];
   /**
-   * Optional localized labels for the tooltip's "group" field.
-   * When omitted, the raw English enum value is shown (e.g. "BACK_UPPER").
+   * Optional localized labels for the tooltip's "group" field and for the
+   * accessible name of each muscle surface. When omitted, the tooltip shows the
+   * raw English enum value (e.g. "BACK_UPPER").
    */
   labels?: Partial<Record<MuscleGroup, string>>;
   /** Per-figure SVG width in px. */
@@ -112,6 +113,10 @@ export function MuscleMap({
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const active = pinned ?? hovered;
+  // Unique per instance so several MuscleMaps on one page (even with the same
+  // body) never share SVG gradient / filter / clipPath ids. Sanitised because
+  // React's useId format (e.g. ":r1:") is not safe inside `url(#…)`.
+  const instanceId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   // Memoised: `viewsFor` returns a fresh array, which would otherwise defeat
   // the `visibleByView` memo below on every render.
   const figures = useMemo(() => viewsFor(view), [view]);
@@ -195,7 +200,8 @@ export function MuscleMap({
             visibleGroups={visibleByView.get(v)!}
             activeGroup={active?.group ?? null}
             glow={glow}
-            idPrefix={`mm-${sex}-${v}`.toLowerCase()}
+            idPrefix={`mm-${instanceId}-${sex}-${v}`.toLowerCase()}
+            {...(labels ? { labels } : {})}
             width={figureWidth}
             backgroundOpacity={backgroundOpacity}
             backgroundGrayscale={backgroundGrayscale}

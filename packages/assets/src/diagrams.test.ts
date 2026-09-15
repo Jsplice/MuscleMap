@@ -36,6 +36,13 @@ describe.each(Object.entries(DIAGRAMS))("%s diagram", (_name, diagram) => {
     expect(diagram.regionBox?.CORE).toBeTruthy();
   });
 
+  it("every traced group is visible in this body's view (else it can never be colored)", () => {
+    for (const m of diagram.muscles) {
+      const { visibility } = MUSCLE_GROUP_META[m.group];
+      expect([diagram.view, "BOTH"]).toContain(visibility);
+    }
+  });
+
   it("every surface id belongs to its group in MUSCLE_GROUP_PARTS", () => {
     for (const m of diagram.muscles) {
       if (m.id === undefined) continue;
