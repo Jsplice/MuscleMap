@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { MuscleColorModel, MuscleGroup, MuscleMapValue, MuscleMapValues } from "@musclemap/core";
 import { getMonochromeColor, getMuscleHeatColor } from "@musclemap/core";
 import type { BodyDiagram, MusclePartId, MusclePath } from "@musclemap/assets";
+import { humanizeMuscleGroup } from "./labels.js";
 
 const NEUTRAL_BASE = "#33405a";
 const NEUTRAL_EDGE = "#212c40";
@@ -33,6 +34,8 @@ export type BodyFigureProps = {
   monochromeBaseColor?: string;
   visibleGroups: ReadonlySet<MuscleGroup>;
   activeGroup: MuscleGroup | null;
+  /** Optional localized group labels used for each surface's accessible name. */
+  labels?: Partial<Record<MuscleGroup, string>>;
   glow: boolean;
   idPrefix: string;
   width?: number;
@@ -94,6 +97,7 @@ function BodyFigureImpl({
   monochromeBaseColor,
   visibleGroups,
   activeGroup,
+  labels,
   glow,
   idPrefix,
   width = 200,
@@ -140,6 +144,14 @@ function BodyFigureImpl({
   };
 
   const glowMuscles = glow ? resolved.filter((r) => r.color) : [];
+
+  // Accessible name: localized group label (or a humanized fallback) plus the
+  // side for left/right surfaces, instead of a raw id like "LATISSIMUS_LEFT".
+  const accessibleName = (m: RenderMuscle): string => {
+    const base = labels?.[m.group] ?? humanizeMuscleGroup(m.group);
+    const side = m.partId?.match(/_(LEFT|RIGHT)$/)?.[1];
+    return side ? `${base} (${side.toLowerCase()})` : base;
+  };
 
   return (
     <svg
@@ -270,7 +282,8 @@ function BodyFigureImpl({
               onMouseLeave={() => onHover(null)}
               role="button"
               tabIndex={0}
-              aria-label={m.partId ?? m.group}
+              aria-label={accessibleName(m)}
+              data-part-id={m.partId}
               onFocus={() => onHover(m.group, m.partId)}
               onBlur={() => onHover(null)}
               onKeyDown={(e) => {
@@ -287,8 +300,5 @@ function BodyFigureImpl({
   );
 }
 
-/**
- * Low-level body renderer for advanced custom compositions.
- * @experimental This API may change before 1.0.
- */
+/** Low-level body renderer for advanced custom compositions (see {@link BodyFigureProps}). */
 export const BodyFigure = memo(BodyFigureImpl);

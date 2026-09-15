@@ -33,7 +33,6 @@ function v(score: number, volumeKg: number, sets: number, trend: "UP" | "DOWN" |
 /** Overall training load — back/chest dominant, calves under-trained (cf. reference). */
 const OVERALL: MuscleMapValues = {
   CHEST: v(88, 7200, 24, "UP"),
-  BACK_UPPER: v(94, 8600, 28, "UP"),
   BACK_LOWER: v(72, 4100, 14, "STABLE"),
   TRAPEZIUS: v(90, 7800, 22, "UP"),
   RHOMBOIDS: v(76, 4600, 16, "STABLE"),
@@ -58,7 +57,6 @@ const OVERALL: MuscleMapValues = {
 /** Strength focus — push/pull heavy, legs lighter. */
 const STRENGTH: MuscleMapValues = {
   CHEST: v(82, 6800, 22, "UP"),
-  BACK_UPPER: v(92, 8200, 26, "UP"),
   BACK_LOWER: v(64, 3200, 12, "STABLE"),
   TRAPEZIUS: v(88, 7400, 20, "UP"),
   RHOMBOIDS: v(72, 4200, 14, "STABLE"),
@@ -83,7 +81,6 @@ const STRENGTH: MuscleMapValues = {
 /** Cardio — lower body and core driven. */
 const CARDIO: MuscleMapValues = {
   CHEST: v(20, 0, 0, "STABLE"),
-  BACK_UPPER: v(46, 0, 0, "UP"),
   BACK_LOWER: v(58, 0, 0, "UP"),
   TRAPEZIUS: v(42, 0, 0, "STABLE"),
   RHOMBOIDS: v(38, 0, 0, "STABLE"),

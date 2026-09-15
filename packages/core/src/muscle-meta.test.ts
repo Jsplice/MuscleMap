@@ -22,7 +22,10 @@ describe("getVisibleMuscleGroups", () => {
     expect(front).not.toContain("LATS"); // back-only
     expect(front).not.toContain("RHOMBOIDS");
 
+    expect(front).toContain("TRICEPS"); // traced on the front bodies too
+
     const back = getVisibleMuscleGroups("BACK");
+    expect(back).toContain("TRICEPS");
     expect(back).toContain("LATS");
     expect(back).toContain("TRAPEZIUS");
     expect(back).not.toContain("CHEST");

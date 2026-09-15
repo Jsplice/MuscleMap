@@ -36,6 +36,13 @@ describe.each(Object.entries(DIAGRAMS))("%s diagram", (_name, diagram) => {
     expect(diagram.regionBox?.CORE).toBeTruthy();
   });
 
+  it("every traced group is visible in this body's view (else it can never be colored)", () => {
+    for (const m of diagram.muscles) {
+      const { visibility } = MUSCLE_GROUP_META[m.group];
+      expect([diagram.view, "BOTH"]).toContain(visibility);
+    }
+  });
+
   it("every surface id belongs to its group in MUSCLE_GROUP_PARTS", () => {
     for (const m of diagram.muscles) {
       if (m.id === undefined) continue;
@@ -81,6 +88,14 @@ describe("MUSCLE_PART_IDS / MUSCLE_GROUP_PARTS (typed source)", () => {
       [MALE_FRONT, MALE_BACK, FEMALE_FRONT, FEMALE_BACK].flatMap(getMuscleSurfaceIds),
     );
     expect(new Set(MUSCLE_PART_IDS)).toEqual(fromDiagrams);
+  });
+
+  it("trapezius is a left/right pair on every body (no un-splittable centre surface)", () => {
+    expect(MUSCLE_GROUP_PARTS.TRAPEZIUS).toEqual(["TRAPEZIUS_LEFT", "TRAPEZIUS_RIGHT"]);
+    for (const d of [MALE_FRONT, MALE_BACK, FEMALE_FRONT, FEMALE_BACK]) {
+      const ids = getMuscleSurfaceIds(d).filter((id) => id.startsWith("TRAPEZIUS"));
+      expect(ids.sort()).toEqual(["TRAPEZIUS_LEFT", "TRAPEZIUS_RIGHT"]);
+    }
   });
 
   it("path-less enum groups map to an empty list", () => {

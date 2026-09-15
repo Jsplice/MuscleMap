@@ -63,7 +63,41 @@ describe("MuscleMap (SSR smoke)", () => {
       values: {},
       partValues: { LATISSIMUS_LEFT: { score: 95 } },
     });
-    expect(html).toContain('aria-label="LATISSIMUS_LEFT"');
+    expect(html).toContain('data-part-id="LATISSIMUS_LEFT"');
     expect(html).toContain(color);
+  });
+
+  it("colors the front triceps (traced on the front bodies, visible from both sides)", () => {
+    const color = getMuscleHeatColor(77, "LOAD");
+    const html = render({ values: { TRICEPS: { score: 77 } }, view: "FRONT" });
+    expect(html).toContain('data-part-id="TRICEPS_LEFT"');
+    expect(html).toContain(color);
+  });
+
+  it("gives every instance its own SVG def ids (no gradient/clip/filter collisions)", () => {
+    const html = renderToStaticMarkup(
+      createElement(
+        "div",
+        null,
+        createElement(MuscleMap, { values, view: "FRONT" }),
+        createElement(MuscleMap, { values, view: "FRONT" }),
+      ),
+    );
+    const ids = [...html.matchAll(/ id="([^"]+)"/g)].map((m) => m[1]);
+    expect(ids.length).toBeGreaterThan(0);
+    expect(new Set(ids).size).toBe(ids.length);
+    // every url(#…) reference resolves to a defined id
+    for (const [, ref] of html.matchAll(/url(#([^)]+))/g)) {
+      expect(ids).toContain(ref);
+    }
+  });
+
+  it("uses localized labels (with side) as the accessible surface name", () => {
+    const html = render({ values, view: "FRONT", labels: { CHEST: "Brust" } });
+    expect(html).toContain('aria-label="Brust (left)"');
+    expect(html).toContain('aria-label="Brust (right)"');
+    // unlabeled groups fall back to a humanized name, never the raw id
+    expect(html).toContain('aria-label="Quads (left)"');
+    expect(html).not.toContain('aria-label="QUADRICEPS_LEFT"');
   });
 });

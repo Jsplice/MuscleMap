@@ -35,9 +35,20 @@ body {
   flex-wrap: wrap;
 }
 
+@media (max-width: 480px) {
+  .page {
+    padding: 12px 8px 40px;
+  }
+  .controls {
+    width: 100%;
+    position: static;
+  }
+}
+
 /* ---------- Phone frame ---------- */
 .phone {
   width: 392px;
+  max-width: 100%;
   background: linear-gradient(180deg, #0c0f16 0%, #090c12 100%);
   border-radius: 46px;
   padding: 12px;
@@ -145,6 +156,12 @@ body {
   display: flex;
   gap: 8px;
   margin-bottom: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chip {
+  flex-shrink: 0;
 }
 
 .chip {
