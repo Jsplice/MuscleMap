@@ -90,6 +90,14 @@ describe("MUSCLE_PART_IDS / MUSCLE_GROUP_PARTS (typed source)", () => {
     expect(new Set(MUSCLE_PART_IDS)).toEqual(fromDiagrams);
   });
 
+  it("trapezius is a left/right pair on every body (no un-splittable centre surface)", () => {
+    expect(MUSCLE_GROUP_PARTS.TRAPEZIUS).toEqual(["TRAPEZIUS_LEFT", "TRAPEZIUS_RIGHT"]);
+    for (const d of [MALE_FRONT, MALE_BACK, FEMALE_FRONT, FEMALE_BACK]) {
+      const ids = getMuscleSurfaceIds(d).filter((id) => id.startsWith("TRAPEZIUS"));
+      expect(ids.sort()).toEqual(["TRAPEZIUS_LEFT", "TRAPEZIUS_RIGHT"]);
+    }
+  });
+
   it("path-less enum groups map to an empty list", () => {
     expect(MUSCLE_GROUP_PARTS.BACK_UPPER).toEqual([]);
     expect(MUSCLE_GROUP_PARTS.HIP_FLEXORS).toEqual([]);
