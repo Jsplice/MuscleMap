@@ -46,7 +46,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.3.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.3.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
